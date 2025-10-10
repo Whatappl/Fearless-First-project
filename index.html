@@ -3,180 +3,183 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FEARLESS FIRST PROJECT</title>
+  <title>FEARLESS AI Access</title>
   <style>
     html, body {
       margin: 0;
-      padding: 0;
       height: 100%;
-      background: black;
-      overflow: hidden;
-      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: black;
       color: white;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      display: block;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
     }
 
     h1 {
-      position: absolute;
-      top: 40px;
-      width: 100%;
-      text-align: center;
-      font-size: 2.5em;
-      letter-spacing: 3px;
+      color: #00ff99;
+      text-shadow: 0 0 15px #00ff99;
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .input-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      padding: 30px;
+      width: 280px;
+      box-shadow: 0 0 15px #00ff99;
+    }
+
+    label {
+      display: block;
       font-weight: bold;
       color: #00ff99;
-      text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
-      z-index: 2;
-    }
-
-    .middle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 2;
-    }
-
-    .middle p {
-      font-size: 1.3em;
       margin-bottom: 10px;
-      color: #ffffff;
-      font-weight: bold;
+      font-size: 1.1em;
     }
 
-    .middle input {
+    input {
+      width: 100%;
       padding: 10px;
-      font-size: 1em;
       border-radius: 8px;
       border: 2px solid #00ff99;
       outline: none;
-      width: 220px;
       text-align: center;
+      font-size: 1em;
       color: #00ff99;
-      background: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .tap-box {
+      margin-top: 15px;
+      background-color: #00ff99;
+      color: black;
+      font-weight: bold;
+      border-radius: 6px;
+      padding: 8px 0;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff99;
+      transition: 0.3s;
+    }
+
+    .tap-box:hover {
+      background-color: #00cc77;
+      transform: scale(1.05);
+    }
+
+    .code-box {
+      display: none;
+      margin-top: 10px;
+      color: #00ff99;
+      background: rgba(0, 255, 153, 0.1);
+      border: 1px solid #00ff99;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: monospace;
+      user-select: all;
     }
 
     .continue-btn {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
+      margin-top: 20px;
       background-color: #00ff99;
       color: black;
       font-weight: bold;
       border: none;
       border-radius: 8px;
-      padding: 15px 25px;
-      font-size: 1.2em;
-      cursor: pointer;
-      z-index: 2;
-      box-shadow: 0 0 15px #00ff99;
+      padding: 12px 20px;
+      font-size: 1em;
+      cursor: not-allowed;
+      opacity: 0.5;
       transition: 0.3s;
     }
 
-    .continue-btn:hover {
-      background-color: #00cc77;
-      box-shadow: 0 0 25px #00ff99;
-      transform: scale(1.05);
+    .continue-btn.active {
+      cursor: pointer;
+      opacity: 1;
+      box-shadow: 0 0 15px #00ff99;
     }
 
-    #message {
+    /* Welcome Page */
+    #welcome {
       display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2em;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #welcome h2 {
       color: #00ff99;
-      font-weight: bold;
-      text-shadow: 0 0 15px #00ff99;
-      z-index: 3;
-      text-align: center;
+      font-size: 2em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 20px #00ff99;
+    }
+
+    #welcome p {
+      font-size: 1.2em;
+      color: #ffffff;
+      max-width: 300px;
     }
   </style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
+  <div id="access">
+    <h1>TO ACCESS FEARLESS AI</h1>
 
-  <h1>FEARLESS FIRST PROJECT</h1>
+    <div class="input-section">
+      <label>INPUT THE CODE</label>
+      <input type="text" id="codeInput" placeholder="Enter access code">
 
-  <div class="middle" id="inputSection">
-    <p>Input your name here to continue:</p>
-    <input type="text" id="nameInput" placeholder="Enter your name">
+      <div class="tap-box" id="tapHere">TAP HERE</div>
+      <div class="code-box" id="codeBox">FEARLESS001</div>
+
+      <button class="continue-btn" id="continueBtn">CONTINUE</button>
+    </div>
   </div>
 
-  <button class="continue-btn" id="continueBtn">CONTINUE</button>
-
-  <div id="message"></div>
+  <div id="welcome">
+    <h2>WELCOME TO FEARLESS AI</h2>
+    <p>FEARLESS AI is ready to answer all your questions 💡🤖</p>
+  </div>
 
   <script>
-    // Matrix Background Animation
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
+    const tapHere = document.getElementById('tapHere');
+    const codeBox = document.getElementById('codeBox');
+    const codeInput = document.getElementById('codeInput');
+    const continueBtn = document.getElementById('continueBtn');
+    const accessPage = document.getElementById('access');
+    const welcomePage = document.getElementById('welcome');
 
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const matrix = letters.split("");
-
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-
-    for (let x = 0; x < columns; x++) drops[x] = 1;
-
-    function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#00ff99";
-      ctx.font = fontSize + "px monospace";
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrix[Math.floor(Math.random() * matrix.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
-          drops[i] = 0;
-
-        drops[i]++;
-      }
-    }
-    setInterval(draw, 33);
-
-    // Responsive canvas
-    window.addEventListener('resize', () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
+    // Show the code when "TAP HERE" is clicked
+    tapHere.addEventListener('click', () => {
+      codeBox.style.display = 'block';
+      navigator.clipboard.writeText('FEARLESS001');
+      alert('Code FEARLESS001 copied!');
     });
 
-    // Continue button logic
-    const btn = document.getElementById('continueBtn');
-    const nameInput = document.getElementById('nameInput');
-    const message = document.getElementById('message');
-    const inputSection = document.getElementById('inputSection');
-
-    btn.addEventListener('click', () => {
-      const name = nameInput.value.trim();
-      if (name === "") {
-        alert("Please enter your name first!");
-        return;
+    // Activate Continue button when correct code is entered
+    codeInput.addEventListener('input', () => {
+      if (codeInput.value.trim().toUpperCase() === 'FEARLESS001') {
+        continueBtn.classList.add('active');
+        continueBtn.disabled = false;
+      } else {
+        continueBtn.classList.remove('active');
+        continueBtn.disabled = true;
       }
+    });
 
-      inputSection.style.display = "none";
-      btn.style.display = "none";
-      message.style.display = "block";
-      message.textContent = `FEARLESS LOVES YOU, ${name.toUpperCase()} 💚`;
+    // Continue to AI page
+    continueBtn.addEventListener('click', () => {
+      if (codeInput.value.trim().toUpperCase() === 'FEARLESS001') {
+        accessPage.style.display = 'none';
+        welcomePage.style.display = 'flex';
+      }
     });
   </script>
 </body>
