@@ -1,6 +1,6 @@
-const API_BASE = "http://localhost:3000/api/chat"; // replace with your hosted API URL
+asyncPI_BASE = "http://localhost:3000/api/chat"; // replace with your hosted API URL
 
-async function sendMessage(msg){
+aURLRLync function sendMessage(msg){
   const res = await fetch(API_BASE, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
