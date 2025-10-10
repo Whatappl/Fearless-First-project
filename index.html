@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FEARLESS FIRST PROJECT</title>
   <style>
-    /* Reset and background setup */
     html, body {
       margin: 0;
+      padding: 0;
       height: 100%;
-      overflow: hidden;
       background: black;
+      overflow: hidden;
       font-family: 'Segoe UI', Arial, sans-serif;
       color: white;
     }
 
-    /* Canvas for matrix background */
     canvas {
       position: fixed;
       top: 0;
@@ -26,7 +25,6 @@
       display: block;
     }
 
-    /* Heading */
     h1 {
       position: absolute;
       top: 40px;
@@ -40,7 +38,34 @@
       z-index: 2;
     }
 
-    /* Continue button */
+    .middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .middle p {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .middle input {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 2px solid #00ff99;
+      outline: none;
+      width: 220px;
+      text-align: center;
+      color: #00ff99;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
     .continue-btn {
       position: absolute;
       bottom: 30px;
@@ -63,20 +88,38 @@
       box-shadow: 0 0 25px #00ff99;
       transform: scale(1.05);
     }
+
+    #message {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      color: #00ff99;
+      font-weight: bold;
+      text-shadow: 0 0 15px #00ff99;
+      z-index: 3;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <!-- Matrix background -->
   <canvas id="matrix"></canvas>
 
-  <!-- Title -->
   <h1>FEARLESS FIRST PROJECT</h1>
 
-  <!-- Continue Button -->
-  <button class="continue-btn">CONTINUE</button>
+  <div class="middle" id="inputSection">
+    <p>Input your name here to continue:</p>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+  </div>
+
+  <button class="continue-btn" id="continueBtn">CONTINUE</button>
+
+  <div id="message"></div>
 
   <script>
-    // MATRIX BACKGROUND SCRIPT
+    // Matrix Background Animation
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
 
@@ -109,13 +152,31 @@
         drops[i]++;
       }
     }
-
     setInterval(draw, 33);
 
-    // Adjust on resize
+    // Responsive canvas
     window.addEventListener('resize', () => {
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
+    });
+
+    // Continue button logic
+    const btn = document.getElementById('continueBtn');
+    const nameInput = document.getElementById('nameInput');
+    const message = document.getElementById('message');
+    const inputSection = document.getElementById('inputSection');
+
+    btn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      if (name === "") {
+        alert("Please enter your name first!");
+        return;
+      }
+
+      inputSection.style.display = "none";
+      btn.style.display = "none";
+      message.style.display = "block";
+      message.textContent = `FEARLESS LOVES YOU, ${name.toUpperCase()} 💚`;
     });
   </script>
 </body>
