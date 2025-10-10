@@ -212,7 +212,48 @@
     const t = userInput.value.trim();
     if (!t) return;
     appendUser(t);
+    userInput.value = "<script>
+const userInput = document.getElementById("userInput");
+const chatBox = document.getElementById("chatBox");
+
+function addUserMessage(msg){
+  const div = document.createElement("div");
+  div.className = "message userMsg";
+  div.textContent = msg;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function addBotMessage(msg){
+  const div = document.createElement("div");
+  div.className = "message botMsg";
+  div.textContent = msg;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Listen for Enter key
+userInput.addEventListener("keypress", async function(e){
+  if(e.key === "Enter" && userInput.value.trim() !== ""){
+    const userMsg = userInput.value.trim();
+    addUserMessage(userMsg);
     userInput.value = "";
+
+    // 🔹 FRONTEND FETCH CALL TO NETLIFY FUNCTION
+    try {
+      const response = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        body: JSON.stringify({ message: userMsg })
+      });
+      const data = await response.json();
+      addBotMessage(data.reply);
+    } catch(err) {
+      addBotMessage("Sorry, there was a network error.");
+      console.error(err);
+    }
+  }
+});
+</script>";
     sendToServer(t);
   });
 
