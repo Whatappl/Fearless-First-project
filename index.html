@@ -3,152 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FEARLESS AI</title>
+<title>FEARLESS AI Access</title>
 <style>
-body {
-  font-family: Arial;
-  background: #000;
-  color: #00ff99;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-  margin: 0;
-}
-h1 { font-size: 1.5em; margin-bottom: 10px; text-align: center; }
-.box {
-  width: 300px;
-  background: rgba(0,0,0,0.7);
-  border: 2px solid #00ff99;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-input[type=text] {
-  width: 100%; padding: 8px; border-radius: 5px; border: 2px solid #00ff99;
-  background: transparent; color: #00ff99; text-align: center; font-size: 14px;
-}
-.tap, button {
-  margin-top: 8px; padding: 8px; background: #00ff99; color: #000;
-  cursor: pointer; font-weight: bold; border-radius: 5px; border: none;
-}
-.code {
-  display: none; margin-top: 8px; padding: 6px;
-  border: 1px solid #00ff99; border-radius: 5px;
-  user-select: all; color: #00ff99; background: rgba(0,255,153,0.1); cursor: pointer;
-}
-button.cont { margin-top: 12px; padding: 8px 12px; font-weight: bold; cursor: not-allowed; opacity: 0.5; }
-button.cont.active { cursor: pointer; opacity: 1; }
-#aiScreen { display: none; flex-direction: column; width: 300px; }
-#chatBox {
-  height: 300px; overflow-y: auto; border: 1px solid #00ff99; border-radius: 5px;
-  padding: 8px; background: rgba(0,0,0,0.6); color: #00ff99; text-align: left; margin-bottom: 8px;
-}
-.msg { margin: 4px 0; padding: 6px 10px; border-radius: 5px; max-width: 80%; }
-.user { background: #00ff99; color: black; margin-left: auto; }
-.bot { background: #003f2a; color: #00ff99; margin-right: auto; }
-#userInput { width: 100%; padding: 6px; border-radius: 5px; border: 1px solid #00ff99; background: transparent; color: #00ff99; }
+  body {
+    font-family: Arial, sans-serif;
+    margin:0; padding:0;
+    display:flex; justify-content:center; align-items:center;
+    background-color:#000;
+    color:#00ff99;
+    height:100vh;
+    flex-direction:column;
+  }
+  h1 { font-size: 1.8em; margin-bottom: 15px; text-align:center; }
+  .box {
+    background: rgba(0,0,0,0.6);
+    padding:20px;
+    border:2px solid #00ff99;
+    border-radius:10px;
+    width:300px;
+    text-align:center;
+    margin-bottom:20px;
+  }
+  input[type=text] {
+    width:100%;
+    padding:8px;
+    border-radius:5px;
+    border:2px solid #00ff99;
+    background:rgba(0,0,0,0.7);
+    color:#00ff99;
+    text-align:center;
+    font-size:16px;
+  }
+  .tap-box {
+    margin-top:10px;
+    padding:8px;
+    background:#00ff99;
+    color:black;
+    font-weight:bold;
+    border-radius:5px;
+    cursor:pointer;
+  }
+  .tap-box:hover { background:#00cc77; }
+  .code-box {
+    display:none;
+    margin-top:10px;
+    padding:6px;
+    border:1px solid #00ff99;
+    border-radius:5px;
+    background: rgba(0,255,153,0.1);
+    cursor: pointer;
+    user-select: all;
+  }
+  .continue-btn {
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+    background:#00ff99;
+    color:black;
+    cursor:not-allowed;
+    opacity:0.5;
+  }
+  .continue-btn.active {
+    cursor:pointer;
+    opacity:1;
+    box-shadow:0 0 10px #00ff99;
+  }
+  #aiScreen {
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    max-width:400px;
+  }
+  #chatBox {
+    width:100%;
+    height:300px;
+    background: rgba(0,0,0,0.7);
+    border:2px solid #00ff99;
+    border-radius:5px;
+    overflow-y:auto;
+    padding:10px;
+    margin-bottom:10px;
+  }
+  .message { margin:5px 0; padding:6px 10px; border-radius:5px; max-width:80%; }
+  .userMsg { background:#00ff99; color:black; align-self:flex-end; }
+  .botMsg { background:#004d33; color:#00ff99; align-self:flex-start; }
+  #userInput {
+    width:100%;
+    padding:8px;
+    border-radius:5px;
+    border:2px solid #00ff99;
+    background:rgba(0,0,0,0.7);
+    color:#00ff99;
+    font-size:16px;
+  }
 </style>
 </head>
 <body>
 
 <h1>TO ACCESS FEARLESS AI</h1>
+
 <div class="box" id="accessBox">
-  <input id="codeInput" placeholder="INPUT THE CODE" />
-  <div class="tap" id="tapHere">TAP HERE</div>
-  <div class="code" id="codeBox">FEARLESS001</div>
-  <button id="continueBtn" class="cont" disabled>CONTINUE</button>
+  <input type="text" id="codeInput" placeholder="INPUT THE CODE">
+  <div class="tap-box" id="tapHere">TAP HERE</div>
+  <div class="code-box" id="codeBox">FEARLESS001</div>
+  <button class="continue-btn" id="continueBtn">CONTINUE</button>
 </div>
 
-<div class="box" id="aiScreen">
-  <h2>WELCOME TO FEARLESS AI</h2>
+<div id="aiScreen">
+  <h1>WELCOME TO FEARLESS AI</h1>
   <div id="chatBox"></div>
-  <input id="userInput" placeholder="Type your message..." />
+  <input type="text" id="userInput" placeholder="Type your message here...">
 </div>
 
 <script>
-const tapHere = document.getElementById("tapHere");
-const codeBox = document.getElementById("codeBox");
-const codeInput = document.getElementById("codeInput");
-const continueBtn = document.getElementById("continueBtn");
-const accessBox = document.getElementById("accessBox");
-const aiScreen = document.getElementById("aiScreen");
-const chatBox = document.getElementById("chatBox");
-const userInput = document.getElementById("userInput");
+  const tapHere = document.getElementById('tapHere');
+  const codeBox = document.getElementById('codeBox');
+  const codeInput = document.getElementById('codeInput');
+  const continueBtn = document.getElementById('continueBtn');
+  const accessBox = document.getElementById('accessBox');
+  const aiScreen = document.getElementById('aiScreen');
+  const chatBox = document.getElementById('chatBox');
+  const userInput = document.getElementById('userInput');
 
-// Show & copy code
-tapHere.addEventListener("click", () => {
-  codeBox.style.display = "block";
-  navigator.clipboard.writeText("FEARLESS001").catch(()=>{});
-  alert("Code FEARLESS001 copied!");
-});
+  tapHere.addEventListener('click', () => {
+    codeBox.style.display='block';
+    navigator.clipboard.writeText('FEARLESS001');
+    alert('Code FEARLESS001 copied!');
+  });
 
-// Enable continue
-codeInput.addEventListener("input", () => {
-  continueBtn.disabled = codeInput.value.trim().toUpperCase() !== "FEARLESS001";
-  continueBtn.classList.toggle("active", !continueBtn.disabled);
-});
+  codeInput.addEventListener('input', () => {
+    if(codeInput.value.trim().toUpperCase()==='FEARLESS001'){
+      continueBtn.classList.add('active');
+      continueBtn.disabled=false;
+    } else {
+      continueBtn.classList.remove('active');
+      continueBtn.disabled=true;
+    }
+  });
 
-// Continue to AI
-continueBtn.addEventListener("click", () => {
-  if (continueBtn.disabled) return;
-  accessBox.style.display = "none";
-  aiScreen.style.display = "flex";
-  addBot("FEARLESS AI is ready to answer your questions.");
-});
+  continueBtn.addEventListener('click', () => {
+    if(codeInput.value.trim().toUpperCase()==='FEARLESS001'){
+      accessBox.style.display='none';
+      aiScreen.style.display='flex';
+      addBotMessage('FEARLESS AI is ready to answer your questions 💡🤖');
+    }
+  });
 
-// Add messages
-function addUser(msg) {
-  const d = document.createElement("div");
-  d.className = "msg user";
-  d.textContent = msg;
-  chatBox.appendChild(d);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function addBot(msg) {
-  const d = document.createElement("div");
-  d.className = "msg bot";
-  d.textContent = msg;
-  chatBox.appendChild(d);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Offline smart reply
-function getReply(message) {
-  const msg = message.toLowerCase();
-
-  // direct intelligent replies
-  if(msg.includes("hello") || msg.includes("hi")) return "Hello! I am FEARLESS AI. How can I help you today?";
-  if(msg.includes("your name")) return "I am called FEARLESS AI, your personal assistant.";
-  if(msg.includes("love")) return "I love you too! 💚 Stay fearless!";
-  if(msg.includes("how are you")) return "I am a bot, but feeling unstoppable!";
-  if(msg.includes("time")) return "I can't show real time, but the moment is always perfect!";
-  if(msg.includes("who are you")) return "I am FEARLESS AI, here to answer all your questions.";
-  if(msg.includes("weather")) return "I can't check live weather, but I hope it's great where you are!";
-  
-  // default generic replies
-  const genericReplies = [
-    "Interesting, tell me more.",
-    "I see. Can you explain?",
-    "That's cool! Go on.",
-    "FEARLESS AI is listening, keep talking!",
-    "Fascinating! What else?"
-  ];
-  return genericReplies[Math.floor(Math.random()*genericReplies.length)];
-}
-
-// Handle user input instantly
-userInput.addEventListener("keypress", (e) => {
-  if(e.key === "Enter" && userInput.value.trim()) {
-    const msg = userInput.value.trim();
-    userInput.value = "";
-    addUser(msg);
-    addBot(getReply(msg)); // instant reply, no thinking
+  function addUserMessage(msg){
+    const div=document.createElement('div');
+    div.className='message userMsg';
+    div.textContent=msg;
+    chatBox.appendChild(div);
+    chatBox.scrollTop=chatBox.scrollHeight;
   }
-});
+  function addBotMessage(msg){
+    const div=document.createElement('div');
+    div.className='message botMsg';
+    div.textContent=msg;
+    chatBox.appendChild(div);
+    chatBox.scrollTop=chatBox.scrollHeight;
+  }
+
+  // Replace with your OpenAI API key
+  const OPENAI_API_KEY = 'YOUR_API_KEY_HERE';
+
+  userInput.addEventListener('keypress', async function(e){
+    if(e.key==='Enter' && userInput.value.trim()!==''){
+      const userMsg=userInput.value.trim();
+      addUserMessage(userMsg);
+      userInput.value='';
+
+      // Call OpenAI API
+      try{
+        const response=await fetch('https://api.openai.com/v1/completions',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'Authorization':'Bearer '+OPENAI_API_KEY
+          },
+          body: JSON.stringify({
+            model:'text-davinci-003',
+            prompt:userMsg,
+            max_tokens:100,
+            temperature:0.7
+          })
+        });
+        const data=await response.json();
+        const reply=data.choices[0].text.trim();
+        addBotMessage(reply);
+      }catch(err){
+        addBotMessage("Sorry, there was an error. Please try again.");
+        console.error(err);
+      }
+    }
+  });
 </script>
+
 </body>
 </html>
