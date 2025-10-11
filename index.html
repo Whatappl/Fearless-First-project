@@ -1,92 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACCESS FEARLESS</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>ACCESS FEARLESS NUMBER — Demo</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #000;
-        color: #00ff99;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        text-align: center;
-    }
-    h1 { margin-bottom: 20px; }
-    .box {
-        background: rgba(0,0,0,0.6);
-        padding: 20px;
-        border: 2px solid #00ff99;
-        border-radius: 10px;
-        width: 300px;
-        margin-bottom: 20px;
-    }
-    input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        border-radius: 5px;
-        border: 2px solid #00ff99;
-        background: rgba(0,0,0,0.7);
-        color: #00ff99;
-        text-align: center;
-        font-size: 16px;
-    }
-    button {
-        padding: 10px 20px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        background: #00ff99;
-        color: black;
-        cursor: pointer;
-    }
-    button:hover { background: #00cc77; }
-    #codeBox { display: none; margin-top: 15px; }
-</style>
-</head>
-<body>
+  :root{
+    --bg:#000;
+    --accent:#00ff66;
+    --muted:#66ffb3;
+  }
+  html,body{height:100%;margin:0;}
+  body{
+    background: var(--bg);
+    color:var(--accent);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;padding:20px;box-sizing:border-box;
+    overflow:hidden;
+  }
 
-<h1>ACCESS FEARLESS NUMBER</h1>
-<div class="box" id="accessBox">
-    <button id="tapBtn">TAP TO CONTINUE</button>
-</div>
+  /* Canvas sits behind UI */
+  canvas#matrixCanvas {
+    position:fixed;
+    inset:0;
+    z-index:0;
+    background:black;
+  }
 
-<div class="box" id="codeBox">
-    <p>Your device has been locked. Contact FEARLESS for code.</p>
-    <input type="text" id="unlockCode" placeholder="Enter code to unlock">
-    <button id="unlockBtn">UNLOCK</button>
-    <p id="message"></p>
-</div>
+  .wrap{
+    position:relative;
+    z-index:2; /* above canvas */
+    width:100%;max-width:420px;
+    text-align:center;
+    pointer-events:auto;
+  }
 
-<script>
-    const tapBtn = document.getElementById('tapBtn');
-    const accessBox = document.getElementById('accessBox');
-    const codeBox = document.getElementById('codeBox');
-    const unlockBtn = document.getElementById('unlockBtn');
-    const unlockCode = document.getElementById('unlockCode');
-    const message = document.getElementById('message');
+  h1{margin:0 0 12px;font-size:20px}
+  p.lead{margin:0 0 18px;color:var(--muted)}
 
-    // Show locked device screen after tapping
-    tapBtn.addEventListener('click', () => {
-        accessBox.style.display = 'none';
-        codeBox.style.display = 'block';
-    });
+  .panel{
+    background:rgba(0,0,0,0.7);
+    border:2px solid rgba(0,255,102,0.08);
+    padding:20px;border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+  }
 
-    // Unlock code check
-    unlockBtn.addEventListener('click', () => {
-        if (unlockCode.value === '5575') {
-            message.style.color = '#00ff99';
-            message.textContent = "Device unlocked! ✅";
-        } else {
-            message.style.color = 'red';
-            message.textContent = "Incorrect code. ❌";
-        }
-    });
-</script>
+  .notice{
+    color:#ffcc66;margin-bottom:12px;font-weight:700;
+  }
 
-</body>
-</html>
+  input[type="password"]{
+    width:100%;box-sizing:border-box;padding:12px;border-radius:8px;border:2px solid rgba(0,255,102,0.12);
+    background:rgba(0,0,0,0.25);color:var(--accent);font-size:16px;text-align:center;
+    outline:none;
+  }
+
+  button{
+    margin-top:12px;padding:10px 14px;border-radius:8px;border:none;background:var(--accent);
+    color:#000;font-weight:700;cursor:pointer;
+  }
+
+  .feedback{margin-top:10px;height:22px;color:#ff6666;font-weight:700}
+  .success{color:#66ff99}
+
+  .disclaimer{margin-top:14px;color:#999;font-size:13px}
+  .fs-btn{margin-top:12px;background:transparent;border:1px
