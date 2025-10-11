@@ -1,47 +1,226 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Fearless AI Chat</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Free Fire Fan — Fearless Page</title>
   <style>
-    body { font-family: Arial; background:#000; color:#0f0; text-align:center; padding:20px; }
-    #chatBox { width:90%; max-width:400px; height:300px; background:#111; margin:10px auto; overflow-y:auto; padding:10px; border-radius:5px; }
-    input { width:70%; padding:8px; border-radius:5px; border:none; background:#222; color:#0f0; }
-    button { padding:8px 15px; border-radius:5px; border:none; background:#0f0; color:#000; cursor:pointer; }
+    :root{
+      --bg:#0b0b0f;
+      --card:#0f0f13;
+      --accent:#ff7a00;
+      --muted:#9aa0a6;
+      --glass: rgba(255,255,255,0.03);
+      --maxw: 980px;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#05050a 0%, #0b0b0f 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;justify-content:center;padding:24px;
+    }
+    .wrap{width:100%;max-width:var(--maxw)}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#ff8a1f,#ff3d6e);
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:#081217;
+      box-shadow:0 6px 20px rgba(255,122,0,0.12), inset 0 -6px 12px rgba(0,0,0,0.25);
+      font-size:20px;
+    }
+    h1{margin:0;font-size:18px;letter-spacing:0.4px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    nav{display:flex;gap:8px;align-items:center}
+    .btn{
+      background:var(--accent);color:#081217;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;
+      box-shadow:0 6px 18px rgba(255,122,0,0.12);
+    }
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+    /* hero */
+    .hero{
+      background: linear-gradient(180deg, rgba(255,122,0,0.04), rgba(255,122,0,0.02));
+      border-radius:var(--radius); padding:18px; display:flex;gap:18px; align-items:center; overflow:hidden;
+      border:1px solid rgba(255,255,255,0.03); box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .hero-left{flex:1}
+    .hero-right{width:240px;flex:0 0 240px;display:flex;align-items:center;justify-content:center}
+    .hero h2{margin:0 0 6px;font-size:20px}
+    .desc{color:var(--muted);font-size:13px;margin-bottom:12px}
+
+    .download-row{display:flex;gap:10px;flex-wrap:wrap}
+    .store{background:var(--card);padding:8px 12px;border-radius:10px;color:var(--muted);display:flex;align-items:center;gap:8px;font-weight:700}
+    .store img{width:24px;height:24px;border-radius:6px;object-fit:cover}
+
+    /* character cards */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
+    }
+    .char-art{height:140px;background:linear-gradient(180deg,#111,#000);border-radius:8px;display:flex;align-items:flex-end;padding:12px}
+    .char-name{font-weight:800;font-size:15px;margin:0}
+    .char-role{font-size:12px;color:var(--muted);margin:4px 0 8px}
+    .small{font-size:12px;color:var(--muted)}
+
+    /* footer */
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* responsive tweaks */
+    @media (max-width:600px){
+      .hero{flex-direction:column; align-items:flex-start}
+      .hero-right{width:100%;order:2}
+    }
+
+    /* subtle animated background shapes */
+    .bg-shape{
+      position:fixed;right:-40px;top:-40px;width:220px;height:220px;border-radius:36px;background:radial-gradient(closest-side, rgba(255,122,0,0.08), transparent);filter:blur(30px);z-index:0;pointer-events:none;
+    }
   </style>
 </head>
 <body>
+  <div class="bg-shape" aria-hidden="true"></div>
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand">
+        <div class="logo">FF</div>
+        <div>
+          <h1>FEARLESS FAN</h1>
+          <p class="lead">Free Fire fan page • skins • news</p>
+        </div>
+      </div>
 
-<h1>Fearless AI Chat</h1>
+      <nav aria-label="Main navigation">
+        <button class="ghost" onclick="scrollToSection('grid')">Characters</button>
+        <button class="ghost" onclick="scrollToSection('download')">Download</button>
+        <button class="btn" onclick="alert('This is a fan site demo. Replace with your links.')">Play Now</button>
+      </nav>
+    </header>
 
-<div id="chatBox"></div>
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <h2>Jump into the battleground — FEARLESS style</h2>
+        <p class="desc">A fan-made landing page to show characters, skins and quick download links. Use this as a template to build your site.</p>
 
-<input type="text" id="userInput" placeholder="Type your message">
-<button onclick="sendMessage()">Send</button>
+        <div class="download-row" id="download">
+          <div class="store" title="Google Play">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><rect width='24' height='24' rx='4' fill='%23007BFF'/></svg>" alt="">
+            Google Play
+          </div>
+          <div class="store" title="APK">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><rect width='24' height='24' rx='4' fill='%23FF7A00'/></svg>" alt="">
+            Download APK
+          </div>
+        </div>
 
-<script>
-const chatBox = document.getElementById('chatBox');
+        <p class="small" style="margin-top:10px">Tip: link "Play Now" to the official store or your distribution after testing.</p>
+      </div>
 
-async function sendMessage() {
-  const input = document.getElementById('userInput');
-  const msg = input.value.trim();
-  if(!msg) return;
+      <div class="hero-right" aria-hidden="true">
+        <!-- decorative hero art (SVG placeholder) -->
+        <svg width="220" height="220" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;overflow:hidden">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#ff8a1f"/>
+              <stop offset="1" stop-color="#ff2e6e"/>
+            </linearGradient>
+          </defs>
+          <rect width="240" height="240" fill="#08080a"/>
+          <g transform="translate(10,12)">
+            <circle cx="110" cy="80" r="72" fill="url(#g)" opacity="0.18"/>
+            <text x="20" y="140" fill="#fff" font-family="Verdana" font-size="18" font-weight="700">Fearless</text>
+          </g>
+        </svg>
+      </div>
+    </section>
 
-  // Show user message
-  chatBox.innerHTML += `<div>You: ${msg}</div>`;
+    <!-- CHARACTERS GRID -->
+    <section id="grid" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="margin:0">Featured Characters</h3>
+        <p class="small" style="margin:0">Latest skins & abilities</p>
+      </div>
 
-  // Call backend
-  const response = await fetch('/.netlify/functions/chat', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({message: msg})
-  });
-  const data = await response.json();
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <div class="char-art">
+            <!-- placeholder art -->
+            <div style="flex:1"></div>
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23000'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
+          </div>
+          <h4 class="char-name">Ranger X</h4>
+          <div class="char-role">Assault • High mobility</div>
+          <div class="small">Special: Speed dash</div>
+        </article>
 
-  chatBox.innerHTML += `<div>Fearless AI: ${data.reply}</div>`;
-  input.value = '';
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-</script>
+        <article class="card" role="listitem">
+          <div class="char-art">
+            <div style="flex:1"></div>
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23222'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
+          </div>
+          <h4 class="char-name">Valkyrie</h4>
+          <div class="char-role">Support • Healer</div>
+          <div class="small">Special: Healing zone</div>
+        </article>
 
+        <article class="card" role="listitem">
+          <div class="char-art">
+            <div style="flex:1"></div>
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23111'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
+          </div>
+          <h4 class="char-name">Blaze</h4>
+          <div class="char-role">Marksman • High damage</div>
+          <div class="small">Special: Flaming rounds</div>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="char-art">
+            <div style="flex:1"></div>
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23000'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
+          </div>
+          <h4 class="char-name">Shadow</h4>
+          <div class="char-role">Stealth • Recon</div>
+          <div class="small">Special: Cloak</div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p style="margin:10px 0 0">This is a fan-made demo page. Replace assets and links before publishing.</p>
+    </footer>
+  </div>
+
+  <script>
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // small enhancement: copy sample APK link when clicking Download
+    document.querySelectorAll('.store').forEach(s=>{
+      s.addEventListener('click', ()=>{
+        navigator.clipboard?.writeText('https://example.com/download').then(()=> {
+          alert('Sample download link copied to clipboard (replace with real link).');
+        }).catch(()=> {
+          alert('Open store link from your distribution.');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
