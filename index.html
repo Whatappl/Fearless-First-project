@@ -1,226 +1,298 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Free Fire Fan — Fearless Page</title>
-  <style>
-    :root{
-      --bg:#0b0b0f;
-      --card:#0f0f13;
-      --accent:#ff7a00;
-      --muted:#9aa0a6;
-      --glass: rgba(255,255,255,0.03);
-      --maxw: 980px;
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#05050a 0%, #0b0b0f 100%);
-      color:#fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;justify-content:center;padding:24px;
-    }
-    .wrap{width:100%;max-width:var(--maxw)}
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:18px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-    }
-    .logo{
-      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#ff8a1f,#ff3d6e);
-      display:flex;align-items:center;justify-content:center;font-weight:800;color:#081217;
-      box-shadow:0 6px 20px rgba(255,122,0,0.12), inset 0 -6px 12px rgba(0,0,0,0.25);
-      font-size:20px;
-    }
-    h1{margin:0;font-size:18px;letter-spacing:0.4px}
-    p.lead{margin:0;color:var(--muted);font-size:13px}
-    nav{display:flex;gap:8px;align-items:center}
-    .btn{
-      background:var(--accent);color:#081217;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;
-      box-shadow:0 6px 18px rgba(255,122,0,0.12);
-    }
-    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:10px;color:var(--muted);cursor:pointer}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fearless vs Hacker — Short Animation</title>
+<style>
+  :root{
+    --bg:#05060a;
+    --neon:#00ff99;
+    --danger:#ff4d6d;
+    --soft:#88ffb3;
+  }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#020306 0%, #07121a 100%);font-family:system-ui,-apple-system,Segoe UI,Roboto;}
+  .stage{
+    height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;
+    color:var(--neon);
+  }
 
-    /* hero */
-    .hero{
-      background: linear-gradient(180deg, rgba(255,122,0,0.04), rgba(255,122,0,0.02));
-      border-radius:var(--radius); padding:18px; display:flex;gap:18px; align-items:center; overflow:hidden;
-      border:1px solid rgba(255,255,255,0.03); box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    }
-    .hero-left{flex:1}
-    .hero-right{width:240px;flex:0 0 240px;display:flex;align-items:center;justify-content:center}
-    .hero h2{margin:0 0 6px;font-size:20px}
-    .desc{color:var(--muted);font-size:13px;margin-bottom:12px}
+  /* subtle star field */
+  .stars{
+    position:absolute; inset:0; z-index:0; background:
+      radial-gradient(#fff0 1px, transparent 2px) 20px 20px/60px 60px,
+      radial-gradient(#fff0 1px, transparent 2px) 50px 70px/80px 80px;
+    opacity:0.06;
+    mix-blend-mode:screen;
+  }
 
-    .download-row{display:flex;gap:10px;flex-wrap:wrap}
-    .store{background:var(--card);padding:8px 12px;border-radius:10px;color:var(--muted);display:flex;align-items:center;gap:8px;font-weight:700}
-    .store img{width:24px;height:24px;border-radius:6px;object-fit:cover}
+  /* battle ground card */
+  .card{
+    position:relative; z-index:2; width:92%; max-width:900px; height:64vh; border-radius:14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(0,255,153,0.05);
+    display:flex; align-items:center; justify-content:center;
+  }
 
-    /* character cards */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-    }
-    .char-art{height:140px;background:linear-gradient(180deg,#111,#000);border-radius:8px;display:flex;align-items:flex-end;padding:12px}
-    .char-name{font-weight:800;font-size:15px;margin:0}
-    .char-role{font-size:12px;color:var(--muted);margin:4px 0 8px}
-    .small{font-size:12px;color:var(--muted)}
+  svg{width:100%; height:100%; display:block; overflow:visible;}
 
-    /* footer */
-    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+  /* names */
+  .label { font-weight:700; font-size:14px; fill:rgba(0,255,153,0.95); font-family:segui,system-ui;}
 
-    /* responsive tweaks */
-    @media (max-width:600px){
-      .hero{flex-direction:column; align-items:flex-start}
-      .hero-right{width:100%;order:2}
-    }
+  /* hacker styling */
+  .hacker-face { fill:#0b1220; stroke:var(--danger); stroke-width:3; filter:drop-shadow(0 6px 12px rgba(255,77,109,0.12)); }
+  .hacker-mask { fill:#0b1220; stroke:#ff6680; stroke-width:1.6; }
+  .hacker-glow { stroke:var(--danger); stroke-opacity:0.7; stroke-width:6; filter: blur(2px); opacity:0.0; }
 
-    /* subtle animated background shapes */
-    .bg-shape{
-      position:fixed;right:-40px;top:-40px;width:220px;height:220px;border-radius:36px;background:radial-gradient(closest-side, rgba(255,122,0,0.08), transparent);filter:blur(30px);z-index:0;pointer-events:none;
-    }
-  </style>
+  /* fearless styling */
+  .fearless-face { fill:#07121a; stroke:var(--neon); stroke-width:3; filter:drop-shadow(0 8px 18px rgba(0,255,153,0.08)); }
+  .cape { fill: url(#capeGrad); opacity:1; }
+  .neon-glow { stroke:var(--neon); stroke-width:8; stroke-opacity:0.08; filter:blur(6px); }
+
+  /* attack beam */
+  .beam { stroke:var(--neon); stroke-width:8; stroke-linecap:round; stroke-opacity:0; filter: drop-shadow(0 6px 18px rgba(0,255,153,0.12)); }
+
+  /* text messages */
+  .msg { font: 700 22px/1.1 system-ui; fill:#fff; text-anchor:middle; opacity:0; }
+
+  /* small effects */
+  .spark { fill: #fff; opacity:0; filter: drop-shadow(0 6px 20px rgba(255,255,255,0.15)); }
+
+  /* instrument control area */
+  .ui {
+    position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:5; display:flex; gap:8px;
+    font-size:13px; color:#99ffce; pointer-events:none;
+  }
+
+  /* victory banner */
+  .victory {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:6; pointer-events:none;
+  }
+  .victory h1{
+    font-family:system-ui; color:rgba(0,255,153,0.98); font-size:48px; letter-spacing:2px;
+    text-shadow: 0 6px 30px rgba(0,255,153,0.06);
+    transform:scale(0.9); opacity:0;
+  }
+
+  /* responsive */
+  @media (max-width:600px){
+    .victory h1{font-size:28px}
+  }
+</style>
 </head>
 <body>
-  <div class="bg-shape" aria-hidden="true"></div>
-  <div class="wrap" role="main">
-    <header>
-      <div class="brand">
-        <div class="logo">FF</div>
-        <div>
-          <h1>FEARLESS FAN</h1>
-          <p class="lead">Free Fire fan page • skins • news</p>
-        </div>
-      </div>
+  <div class="stage" role="main" aria-label="Fearless battle animation">
+    <div class="stars" aria-hidden="true"></div>
 
-      <nav aria-label="Main navigation">
-        <button class="ghost" onclick="scrollToSection('grid')">Characters</button>
-        <button class="ghost" onclick="scrollToSection('download')">Download</button>
-        <button class="btn" onclick="alert('This is a fan site demo. Replace with your links.')">Play Now</button>
-      </nav>
-    </header>
+    <div class="card" id="arena">
+      <!-- SVG battle scene -->
+      <svg viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" id="battleSVG" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+        <title id="title">Fearless vs Hacker short animation</title>
+        <desc id="desc">A short animated fight where fearless defeats hacker.</desc>
 
-    <!-- HERO -->
-    <section class="hero" aria-label="Hero">
-      <div class="hero-left">
-        <h2>Jump into the battleground — FEARLESS style</h2>
-        <p class="desc">A fan-made landing page to show characters, skins and quick download links. Use this as a template to build your site.</p>
+        <!-- defs -->
+        <defs>
+          <linearGradient id="capeGrad" x1="0" x2="1"><stop offset="0" stop-color="#00ff99"/><stop offset="1" stop-color="#00cc77"/></linearGradient>
+          <filter id="blur"><feGaussianBlur stdDeviation="2" /></filter>
+        </defs>
 
-        <div class="download-row" id="download">
-          <div class="store" title="Google Play">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><rect width='24' height='24' rx='4' fill='%23007BFF'/></svg>" alt="">
-            Google Play
-          </div>
-          <div class="store" title="APK">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><rect width='24' height='24' rx='4' fill='%23FF7A00'/></svg>" alt="">
-            Download APK
-          </div>
-        </div>
+        <!-- ground -->
+        <rect x="0" y="520" width="1000" height="120" fill="rgba(0,0,0,0.45)"/>
+        <g id="hackerGroup" transform="translate(720,360)">
+          <!-- hacker name -->
+          <text x="0" y="-120" class="label" text-anchor="middle">HACKER</text>
 
-        <p class="small" style="margin-top:10px">Tip: link "Play Now" to the official store or your distribution after testing.</p>
-      </div>
-
-      <div class="hero-right" aria-hidden="true">
-        <!-- decorative hero art (SVG placeholder) -->
-        <svg width="220" height="220" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;overflow:hidden">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#ff8a1f"/>
-              <stop offset="1" stop-color="#ff2e6e"/>
-            </linearGradient>
-          </defs>
-          <rect width="240" height="240" fill="#08080a"/>
-          <g transform="translate(10,12)">
-            <circle cx="110" cy="80" r="72" fill="url(#g)" opacity="0.18"/>
-            <text x="20" y="140" fill="#fff" font-family="Verdana" font-size="18" font-weight="700">Fearless</text>
+          <!-- hacker character (simple masked figure) -->
+          <g id="hacker" transform="translate(0,0)">
+            <circle class="hacker-face" cx="0" cy="0" r="64"/>
+            <rect x="-44" y="6" width="88" height="34" rx="8" class="hacker-mask" />
+            <circle cx="-22" cy="-6" r="8" fill="#fff" />
+            <circle cx="22" cy="-6" r="8" fill="#fff" />
+            <!-- hacker glow for attack -->
+            <circle class="hacker-glow" cx="0" cy="0" r="88" />
           </g>
-        </svg>
-      </div>
-    </section>
+        </g>
 
-    <!-- CHARACTERS GRID -->
-    <section id="grid" style="margin-top:18px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <h3 style="margin:0">Featured Characters</h3>
-        <p class="small" style="margin:0">Latest skins & abilities</p>
-      </div>
+        <g id="fearlessGroup" transform="translate(280,360)">
+          <text x="0" y="-120" class="label" text-anchor="middle">FEARLESS</text>
 
-      <div class="grid" role="list">
-        <article class="card" role="listitem">
-          <div class="char-art">
-            <!-- placeholder art -->
-            <div style="flex:1"></div>
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23000'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
-          </div>
-          <h4 class="char-name">Ranger X</h4>
-          <div class="char-role">Assault • High mobility</div>
-          <div class="small">Special: Speed dash</div>
-        </article>
+          <!-- fearless character -->
+          <g id="fearless" transform="translate(0,0)">
+            <path class="cape" d="M -90 10 q 40 -100 140 -20 q -20 80 -120 60 z"/>
+            <circle class="fearless-face" cx="0" cy="0" r="64"/>
+            <circle cx="-18" cy="-8" r="8" fill="#001"/>
+            <circle cx="18" cy="-8" r="8" fill="#001" />
+            <path d="M -12 18 q 12 12 24 0" stroke="#00ff99" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <circle class="neon-glow" cx="0" cy="0" r="84"/>
+          </g>
+        </g>
 
-        <article class="card" role="listitem">
-          <div class="char-art">
-            <div style="flex:1"></div>
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23222'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
-          </div>
-          <h4 class="char-name">Valkyrie</h4>
-          <div class="char-role">Support • Healer</div>
-          <div class="small">Special: Healing zone</div>
-        </article>
+        <!-- attack beam (from fearless to hacker) -->
+        <line id="beam" class="beam" x1="320" y1="360" x2="680" y2="360" />
 
-        <article class="card" role="listitem">
-          <div class="char-art">
-            <div style="flex:1"></div>
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23111'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
-          </div>
-          <h4 class="char-name">Blaze</h4>
-          <div class="char-role">Marksman • High damage</div>
-          <div class="small">Special: Flaming rounds</div>
-        </article>
+        <!-- sparks -->
+        <g id="sparks" opacity="0">
+          <circle class="spark" cx="680" cy="360" r="4"/>
+          <circle class="spark" cx="695" cy="350" r="3"/>
+          <circle class="spark" cx="665" cy="370" r="3"/>
+        </g>
 
-        <article class="card" role="listitem">
-          <div class="char-art">
-            <div style="flex:1"></div>
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='10' fill='%23000'/></svg>" alt="" style="width:86px;height:86px;border-radius:8px;">
-          </div>
-          <h4 class="char-name">Shadow</h4>
-          <div class="char-role">Stealth • Recon</div>
-          <div class="small">Special: Cloak</div>
-        </article>
-      </div>
-    </section>
+        <!-- message text -->
+        <text id="message" x="500" y="120" class="msg">...</text>
 
-    <footer>
-      <p style="margin:10px 0 0">This is a fan-made demo page. Replace assets and links before publishing.</p>
-    </footer>
+      </svg>
+    </div>
+
+    <div class="victory" aria-hidden="true"><h1 id="victoryText">FEARLESS WINS</h1></div>
+
+    <div class="ui" aria-hidden="true">Press PLAY to watch — animation auto-plays</div>
   </div>
 
-  <script>
-    function scrollToSection(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.scrollIntoView({behavior:'smooth',block:'start'});
+<script>
+/* Simple timeline animation using requestAnimationFrame and time checks */
+(function(){
+  const beam = document.getElementById('beam');
+  const hacker = document.getElementById('hacker');
+  const fearless = document.getElementById('fearless');
+  const hackerGroup = document.getElementById('hackerGroup');
+  const fearlessGroup = document.getElementById('fearlessGroup');
+  const hackerGlow = hacker.querySelector('.hacker-glow');
+  const sparks = document.getElementById('sparks');
+  const message = document.getElementById('message');
+  const victoryText = document.getElementById('victoryText');
+
+  // initial styles
+  beam.style.strokeOpacity = 0;
+  hackerGlow.style.opacity = 0;
+  sparks.style.opacity = 0;
+  message.style.opacity = 0;
+  victoryText.style.opacity = 0;
+
+  let start = null;
+  // timeline durations in ms
+  // 0-1200: intro walk; 1200-2200: hacker attack; 2200-3000: fearless counter; 3000-3800: beam hits; 3800-4800: victory
+  function step(ts){
+    if (!start) start = ts;
+    const t = ts - start;
+
+    // intro: fearless moves slightly forward, hacker moves forward
+    if (t < 1200) {
+      const p = t / 1200;
+      fearlessGroup.setAttribute('transform', `translate(${280 + p*40},${360 - p*10})`);
+      hackerGroup.setAttribute('transform', `translate(${720 - p*60},${360 - p*6})`);
+      message.style.opacity = 0;
     }
 
-    // small enhancement: copy sample APK link when clicking Download
-    document.querySelectorAll('.store').forEach(s=>{
-      s.addEventListener('click', ()=>{
-        navigator.clipboard?.writeText('https://example.com/download').then(()=> {
-          alert('Sample download link copied to clipboard (replace with real link).');
-        }).catch(()=> {
-          alert('Open store link from your distribution.');
-        });
+    // hacker charges and glows
+    if (t >= 1200 && t < 2200) {
+      const p = (t - 1200) / 1000;
+      hackerGlow.style.opacity = 0.6 * Math.sin(p * Math.PI);
+      // hacker shakes forward
+      const shake = Math.sin((t - 1200)/60) * 2;
+      hacker.setAttribute('transform', `translate(${shake},0)`);
+      message.textContent = "HACKER: Initiating attack!";
+      message.style.opacity = 0.95;
+    } else {
+      hacker.setAttribute('transform', `translate(0,0)`);
+    }
+
+    // fearless quick dodge and charge
+    if (t >= 2200 && t < 3000) {
+      const p = (t - 2200) / 800;
+      // fearless flashes and leans forward
+      fearless.querySelector('.fearless-face').style.filter = `drop-shadow(0 0 ${6 + p*18}px rgba(0,255,153,${0.1 + p*0.3}))`;
+      message.textContent = "FEARLESS: Counter!";
+      message.style.opacity = 0.95;
+    }
+
+    // beam fires
+    if (t >= 3000 && t < 3600) {
+      const p = (t - 3000) / 600;
+      beam.style.strokeOpacity = Math.min(1, p*1.4);
+      // beam flicker
+      beam.style.strokeWidth = (8 + Math.sin(t/40)*2);
+      // move beam endpoints slightly for energy feel
+      beam.setAttribute('x1', 320 + Math.sin(t/20)*6);
+      beam.setAttribute('y1', 360 - Math.sin(t/30)*4);
+      beam.setAttribute('x2', 680 + Math.sin(t/25)*4);
+      beam.setAttribute('y2', 360 + Math.sin(t/35)*4);
+      message.textContent = "FEARLESS: Light Strike!";
+      message.style.opacity = 0.95;
+    }
+
+    // impact
+    if (t >= 3600 && t < 4200) {
+      const p = (t - 3600) / 600;
+      // flash sparks
+      sparks.style.opacity = 1;
+      const sEls = sparks.querySelectorAll('circle');
+      sEls.forEach((c,i)=>{
+        c.style.opacity = 1 - Math.abs(Math.sin((t + i*80)/120));
+        const r = 3 + Math.random()*5;
+        c.setAttribute('r', r);
       });
-    });
-  </script>
+      // hacker staggers and fades
+      hackerGroup.style.transition = 'none';
+      hackerGroup.setAttribute('transform', `translate(${720 - 20 + Math.random()*10},${360 - 6 - p*40})`);
+      hackerGlow.style.opacity = Math.max(0, 0.8 - p*1.5);
+      beam.style.strokeOpacity = Math.max(0, 1 - p*2);
+      message.textContent = "Impact!";
+    }
+
+    // victory
+    if (t >= 4200 && t < 5200) {
+      const p = (t - 4200) / 1000;
+      // fade out hacker
+      hackerGroup.style.opacity = Math.max(0, 1 - p*1.6);
+      sparks.style.opacity = Math.max(0, 1 - p*1.8);
+      // fearless small victory hop
+      fearlessGroup.setAttribute('transform', `translate(${320 + Math.sin(t/120)*4},${360 - Math.max(0,10 - p*30)})`);
+      // show victory text
+      victoryText.style.transform = `scale(${0.9 + p*0.2})`;
+      victoryText.style.opacity = Math.min(1, p*1.2);
+      message.textContent = "FEARLESS: Victory!";
+      message.style.opacity = 1;
+    }
+
+    // end: hold final pose
+    if (t >= 5200) {
+      victoryText.style.opacity = 1;
+      // stop animation loop after hold
+      return;
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // small intro fade-in for message
+  function intro(){
+    message.style.opacity = 0;
+    victoryText.style.opacity = 0;
+    requestAnimationFrame(step);
+  }
+
+  // auto-start the animation when page loads
+  window.addEventListener('load', () => {
+    // slight delay for dramatic effect
+    setTimeout(intro, 400);
+  });
+
+  // allow replay on click - restart by reloading transforms and restarting timeline
+  document.getElementById('arena').addEventListener('click', () => {
+    // reset things
+    beam.style.strokeOpacity = 0;
+    hackerGlow.style.opacity = 0;
+    sparks.style.opacity = 0;
+    hackerGroup.style.opacity = 1;
+    victoryText.style.opacity = 0;
+    message.style.opacity = 0;
+    document.getElementById('hackerGroup').setAttribute('transform','translate(720,360)');
+    document.getElementById('fearlessGroup').setAttribute('transform','translate(280,360)');
+    // restart
+    requestAnimationFrame((ts)=>{ start = null; step(ts); });
+  });
+})();
+</script>
 </body>
 </html>
