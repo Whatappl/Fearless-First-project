@@ -1,417 +1,168 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>StoryBook Center — 10 Adventures (20 Chapters Each)</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Fearless Bible App — Online</title>
 <style>
   :root{
-    --bg:#fff;
-    --card:#f8fafc;
-    --accent:#0b67d0;
-    --muted:#666;
+    --bg:#000;
+    --card:#07070a;
+    --accent:#0ab4ff;
+    --muted:#9aa5b1;
   }
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#111}
-  .wrap{max-width:980px;margin:24px auto;padding:16px}
-  header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  h1{font-size:22px;margin:0}
-  p.lead{margin:6px 0 18px;color:var(--muted)}
-
-  .panel{background:var(--card);border:1px solid rgba(0,0,0,0.06);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(10,20,30,0.04);margin-bottom:18px}
-  label{display:block;text-align:left;margin:8px 0 4px;font-size:13px;color:var(--muted)}
-  input[type="text"],input[type="email"],input[type="tel"],input[type="password"],textarea{
-    width:100%;padding:12px;border-radius:8px;border:1px solid #d0d7de;box-sizing:border-box;font-size:15px;
+  html,body{height:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;background:var(--bg);color:#efefef}
+  .app{max-width:920px;margin:18px auto;padding:16px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  h1{font-size:20px;margin:0;color:var(--accent)}
+  .muted{color:var(--muted);font-size:13px}
+  .card{background:linear-gradient(180deg,var(--card), #050506);border-radius:14px;padding:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03);margin-top:14px}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+  input[type="text"], input[type="search"]{
+    width:100%;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;font-size:15px;outline:none;box-sizing:border-box
   }
-  .row{display:flex;gap:8px;flex-wrap:wrap}
-  button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer}
-  button.ghost{background:transparent;color:var(--accent);border:1px solid rgba(11,103,208,0.12)}
-  .small{font-size:13px;color:var(--muted)}
+  button{background:var(--accent);color:#001;font-weight:700;border:none;padding:10px 14px;border-radius:10px;cursor:pointer}
+  .row{display:flex;gap:8px;align-items:center}
+  .col{flex:1}
+  .lang-title{color:var(--accent);margin-top:10px;font-weight:700}
+  .verse-block{background:#07080a;padding:12px;border-radius:10px;margin-top:12px;border:1px solid rgba(255,255,255,0.03);text-align:left;line-height:1.6}
+  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
   .hidden{display:none}
-
-  /* stories grid */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-  .card{background:#fff;border-radius:10px;padding:12px;border:1px solid rgba(10,20,30,0.04);cursor:pointer;box-shadow:0 6px 16px rgba(10,20,30,0.03)}
-  .card h3{margin:0 0 8px;font-size:16px}
-  .card p{margin:0;color:var(--muted);font-size:13px}
-  .tag{margin-top:10px;font-size:13px;color:var(--muted)}
-
-  /* story view */
-  .story-view .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-  .chapters{margin-top:14px;text-align:left}
-  .chapter{border-left:4px solid var(--accent);padding:12px;border-radius:6px;background:#fff;margin-bottom:12px}
-  .chapter h4{margin:0 0 8px}
-
-  footer{margin-top:18px;text-align:center;color:var(--muted);padding:12px 0}
-  a.wh{color:#25D366;text-decoration:none;font-weight:700}
-
-  @media (max-width:560px){
-    .wrap{padding:12px}
-  }
+  @media(max-width:640px){ .row{flex-direction:column} }
 </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="app">
     <header>
       <div>
-        <h1>StoryBook Center</h1>
-        <p class="lead">Adventure collection — unlock full stories via the key. For access message: <strong>+2349056539307</strong></p>
+        <h1>Fearless Bible App</h1>
+        <div class="muted">Online • Made by Fearless</div>
       </div>
-      <div class="small">Made by <strong>Fearless Stories</strong></div>
+      <div id="userBadge" class="muted"></div>
     </header>
 
-    <!-- SIGNUP -->
-    <section id="signupPanel" class="panel">
-      <h2>Create account</h2>
-      <p class="small">Enter your name, Gmail (used to login), and phone (exactly 10 digits).</p>
-      <label for="name">Full name</label>
-      <input id="signupName" type="text" placeholder="Your full name">
-
-      <label for="email">Gmail</label>
-      <input id="signupEmail" type="email" placeholder="you@gmail.com">
-
-      <label for="phone">Phone (10 digits)</label>
-      <input id="signupPhone" type="tel" placeholder="0901234567" maxlength="10">
-
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button id="signupBtn">Continue</button>
-        <button class="ghost" id="toLoginBtn">Have an account? Login</button>
+    <!-- NAME SCREEN -->
+    <section id="nameCard" class="card">
+      <label>Enter Your Name To proceed</label>
+      <div class="row">
+        <input id="nameInput" type="text" placeholder="Your name (e.g. Emmanuel)">
+        <button id="nameContinue">Continue</button>
       </div>
-      <p id="signupMsg" class="small" style="color:#d04545;margin-top:10px"></p>
+      <p class="muted" style="margin-top:8px">This online app fetches Bible verses live in English.</p>
     </section>
 
-    <!-- LOGIN -->
-    <section id="loginPanel" class="panel hidden">
-      <h2>Login</h2>
-      <p class="small">Enter Gmail to login to your account.</p>
-      <input id="loginEmail" type="email" placeholder="you@gmail.com">
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button id="loginBtn">Login</button>
-        <button class="ghost" id="toSignupBtn">Back to signup</button>
-      </div>
-      <p id="loginMsg" class="small" style="color:#d04545;margin-top:10px"></p>
-    </section>
-
-    <!-- STORIES LIST -->
-    <section id="storiesPanel" class="panel hidden">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-        <h2 style="margin:0">Adventure Stories</h2>
-        <div><button class="ghost" id="logoutBtn">Logout</button></div>
-      </div>
-      <p class="small">Tap a title to request the key. Key input placeholder reads: <em>"Input the key given"</em>.</p>
-      <div class="grid" id="storiesGrid" style="margin-top:12px"></div>
-    </section>
-
-    <!-- KEY ENTRY -->
-    <section id="keyPanel" class="panel hidden">
-      <h2 id="keyTitle">Unlock story</h2>
-      <p class="small">Message <a class="wh" href="https://wa.me/2349056539307" target="_blank">+2349056539307</a> on WhatsApp for access.</p>
-      <label class="small">Input the key given</label>
-      <input id="keyInput" type="text" placeholder="Input the key given">
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button id="unlockBtn">Unlock</button>
-        <button class="ghost" id="cancelUnlockBtn">Cancel</button>
-      </div>
-      <p id="keyMsg" class="small" style="color:#d04545;margin-top:10px"></p>
-    </section>
-
-    <!-- STORY VIEW -->
-    <section id="storyView" class="panel hidden story-view">
-      <div class="meta">
-        <div>
-          <h2 id="storyTitle">Story title</h2>
-          <p class="small" id="storyAuthor">By Fearless</p>
+    <!-- MAIN UI -->
+    <section id="mainCard" class="card hidden" aria-hidden="true">
+      <div class="row">
+        <div class="col">
+          <label>Search (reference — e.g. John 3:16, Psalm 23)</label>
+          <input id="searchInput" type="search" placeholder="Type reference and press Search">
         </div>
-        <div class="small">Contact: <a class="wh" href="https://wa.me/2349056539307" target="_blank">+2349056539307</a></div>
+        <div style="width:110px">
+          <label>&nbsp;</label>
+          <button id="searchBtn">Search</button>
+        </div>
       </div>
 
-      <div id="chapters" class="chapters" style="margin-top:12px"></div>
-
-      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end">
-        <button id="backToListBtn">Back to list</button>
-        <button class="ghost" id="homeBtn">Home</button>
-      </div>
+      <div id="statusLine" class="muted" style="margin-top:10px"></div>
+      <div id="resultArea" style="margin-top:12px"></div>
     </section>
 
-    <footer>
-      <p class="small">Made by <strong>Fearless Stories</strong> • © <span id="year"></span></p>
-    </footer>
+    <footer>📖 Produced by <strong>Fearless</strong></footer>
   </div>
 
 <script>
-/* ---------- Config & storage ---------- */
-const ACCESS_KEY = "FEARLESS-STORIES-KEY"; // internal key (users must be given this)
-const USER_KEY = "fs_user";
-const UNLOCK_KEY = "fs_unlocked"; // stores array of unlocked story IDs
+const userBadge = document.getElementById('userBadge');
+const nameCard = document.getElementById('nameCard');
+const mainCard = document.getElementById('mainCard');
+const nameInput = document.getElementById('nameInput');
+const nameContinue = document.getElementById('nameContinue');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const statusLine = document.getElementById('statusLine');
+const resultArea = document.getElementById('resultArea');
 
-const STORY_TITLES = [
-  "1. The Hidden Temple",
-  "2. Lost Island Mystery",
-  "3. Journey to the Underground City",
-  "4. Flames of the Desert",
-  "5. The Star Chaser",
-  "6. The Sword of Destiny",
-  "7. The King's Secret",
-  "8. The Whispering Forest",
-  "9. Rise of the Dragon Hunter",
-  "10. The Time Traveler’s Diary"
-];
-
-/* ---------- small sentence fragment banks for dynamic chapter generation ---------- */
-const openings = [
-  "The air was thick with the scent of wet earth and old stories.",
-  "At first light the village looked as it always had — quiet and waiting.",
-  "No map ever led them to the place they needed; curiosity did.",
-  "A single lantern revealed a path no one had followed for decades.",
-  "Winds carried whispers of something that had been sleeping beneath the stones."
-];
-
-const middles = [
-  "They walked on, the crunch of leaves underfoot keeping time with their hearts.",
-  "Stories passed down by elders suddenly made sense, like keys fitting into locks.",
-  "A companion's laugh faded into a memory, then returned stronger after a test of courage.",
-  "Old tools and relics gave hints — not of treasure, but of how people used to live with honor.",
-  "Obstacles taught them to move together; trust was the map that mattered most."
-];
-
-const twists = [
-  "A choice was asked of them: keep what they found, or leave it to restore balance.",
-  "A memory surfaced that turned the journey from quest to reckoning.",
-  "The very thing they chased refused to be owned; it only wanted to be understood.",
-  "Night revealed a truth that daylight had hidden: sometimes the monster is the fear inside.",
-  "They found that the map was not paper but a song sung by the earth itself."
-];
-
-const closers = [
-  "When the sun rose, they understood that the cost of courage sometimes was more than they expected.",
-  "They walked home differently — not lighter, but wiser, with stories to pass on.",
-  "The village lit fires that night and listened until the stars grew tired.",
-  "What they carried was not gold, but a promise — to remember, to protect, to teach.",
-  "And so the story moved forward, folded into the lives of people who chose to be brave."
-];
-
-/* helper to build a chapter paragraph (ensures variety) */
-function buildChapter(storyIndex, chapterIndex){
-  // deterministic pseudo-random (so chapters stay same across page reload)
-  const seed = (storyIndex*31 + chapterIndex*17) % 997;
-  function pick(arr, i){ return arr[(seed + i) % arr.length]; }
-
-  const opening = pick(openings, 1);
-  const middle1 = pick(middles, 2);
-  const twist = pick(twists, 3);
-  const middle2 = pick(middles, 4);
-  const closer = pick(closers, 5);
-
-  // Compose a longer, multi-sentence chapter (3-6 sentences)
-  const paragraph = `${opening} ${middle1} ${twist} ${middle2} ${closer}`;
-
-  // Add a small "scene detail" sentence to lengthen it a bit
-  const detail = ` Chapter ${chapterIndex} of the story reveals a small truth: ${storyIndex % 2 === 0 ? "memories can heal" : "actions echo farther than expected"}.`;
-  return paragraph + detail;
-}
-
-/* ---------- UI elements ---------- */
-const signupPanel = document.getElementById("signupPanel");
-const loginPanel = document.getElementById("loginPanel");
-const storiesPanel = document.getElementById("storiesPanel");
-const keyPanel = document.getElementById("keyPanel");
-const storyView = document.getElementById("storyView");
-
-const signupBtn = document.getElementById("signupBtn");
-const toLoginBtn = document.getElementById("toLoginBtn");
-const toSignupBtn = document.getElementById("toSignupBtn");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-
-const storiesGrid = document.getElementById("storiesGrid");
-const keyInput = document.getElementById("keyInput");
-const unlockBtn = document.getElementById("unlockBtn");
-const cancelUnlockBtn = document.getElementById("cancelUnlockBtn");
-const keyMsg = document.getElementById("keyMsg");
-
-const storyTitleEl = document.getElementById("storyTitle");
-const storyAuthorEl = document.getElementById("storyAuthor");
-const chaptersEl = document.getElementById("chapters");
-
-/* ---------- storage helpers ---------- */
-function getUnlocked(){
-  const raw = localStorage.getItem(UNLOCK_KEY);
-  if (!raw) return [];
-  try { return JSON.parse(raw); } catch(e){ return []; }
-}
-function saveUnlocked(arr){
-  localStorage.setItem(UNLOCK_KEY, JSON.stringify(arr));
-}
-
-/* ---------- initial wiring ---------- */
-document.getElementById("year").innerText = new Date().getFullYear();
-
-/* Signup logic */
-signupBtn.addEventListener("click", ()=>{
-  const name = document.getElementById("signupName").value.trim();
-  const email = document.getElementById("signupEmail").value.trim();
-  const phone = document.getElementById("signupPhone").value.trim();
-  const msg = document.getElementById("signupMsg");
-  msg.textContent = "";
-
-  if (!name){ msg.textContent = "Please enter your name."; return; }
-  if (!email && !phone){ msg.textContent = "Provide email or phone."; return; }
-  if (phone && !/^\d{10}$/.test(phone)){ msg.textContent = "Phone must be exactly 10 digits."; return; }
-
-  const user = { name, email, phone };
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
-  if (!localStorage.getItem(UNLOCK_KEY)) saveUnlocked([]);
-  showStories();
+/* Start app */
+nameContinue.addEventListener('click', ()=>{
+  const n = nameInput.value.trim();
+  if(!n) return alert('Please enter your name');
+  userBadge.innerText = `Welcome, ${n}`;
+  nameCard.classList.add('hidden');
+  mainCard.classList.remove('hidden');
 });
 
-/* navigation buttons */
-toLoginBtn.addEventListener("click", ()=>{ signupPanel.classList.add("hidden"); loginPanel.classList.remove("hidden"); });
-document.getElementById("toSignupBtn")?.addEventListener("click", ()=>{ loginPanel.classList.add("hidden"); signupPanel.classList.remove("hidden"); });
+/* Main search handler */
+searchBtn.addEventListener('click', ()=> runSearch(searchInput.value.trim()));
+searchInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') runSearch(searchInput.value.trim()); });
 
-/* Login action */
-loginBtn.addEventListener("click", ()=>{
-  const input = document.getElementById("loginEmail").value.trim();
-  const msg = document.getElementById("loginMsg");
-  msg.textContent = "";
-  const raw = localStorage.getItem(USER_KEY);
-  if (!raw){ msg.textContent = "No user in this browser. Please sign up first."; return; }
-  try{
-    const user = JSON.parse(raw);
-    if (user.email && user.email === input){
-      showStories();
-    } else {
-      msg.textContent = "Email mismatch — sign up with this email first.";
+async function runSearch(query){
+  if(!query) return alert('Enter a reference (e.g. John 3:16)');
+  resultArea.innerHTML = `<div class="muted">⏳ Searching for "${escapeHtml(query)}"...</div>`;
+
+  const ref = parseReference(query);
+  if(ref){
+    try{
+      const eng = await fetchEnglishReference(ref.book + ' ' + ref.chapter + (ref.verse?(':'+ref.verse):''));
+      resultArea.innerHTML = '';
+      addEnglishBlock(eng);
+    }catch(err){
+      console.error(err);
+      resultArea.innerHTML = `<div class="muted">❌ Could not load reference: ${escapeHtml(err.message)}</div>`;
     }
-  }catch(e){
-    msg.textContent = "Error reading user data.";
-  }
-});
-
-/* Logout */
-logoutBtn.addEventListener("click", ()=>{
-  storiesPanel.classList.add("hidden");
-  signupPanel.classList.remove("hidden");
-});
-
-/* Show stories grid */
-function showStories(){
-  signupPanel.classList.add("hidden");
-  loginPanel.classList.add("hidden");
-  keyPanel.classList.add("hidden");
-  storyView.classList.add("hidden");
-  storiesPanel.classList.remove("hidden");
-  renderStories();
-}
-
-/* render story cards */
-function renderStories(){
-  storiesGrid.innerHTML = "";
-  const unlocked = getUnlocked();
-  STORY_TITLES.forEach((title, idx)=>{
-    const id = idx + 1;
-    const card = document.createElement("div");
-    card.className = "card";
-    const h3 = document.createElement("h3"); h3.textContent = title;
-    const p = document.createElement("p"); p.textContent = "An epic adventure in multiple chapters.";
-    const tag = document.createElement("div"); tag.className="tag";
-    tag.textContent = unlocked.includes(id) ? "Unlocked" : "Locked — requires key";
-    card.appendChild(h3); card.appendChild(p); card.appendChild(tag);
-    card.addEventListener("click", ()=> onStoryClick(id));
-    storiesGrid.appendChild(card);
-  });
-}
-
-/* story click */
-let currentStoryId = null;
-function onStoryClick(id){
-  currentStoryId = id;
-  const unlocked = getUnlocked();
-  if (unlocked.includes(id)){
-    openStoryView(id);
     return;
   }
-  // show key panel
-  document.getElementById("keyTitle").textContent = `Unlock: ${STORY_TITLES[id-1]}`;
-  keyInput.value = "";
-  keyMsg.textContent = "";
-  storiesPanel.classList.add("hidden");
-  keyPanel.classList.remove("hidden");
+
+  resultArea.innerHTML = `<div class="muted">Please use references like "John 3:16" or "Psalm 23".</div>`;
 }
 
-/* cancel unlock */
-cancelUnlockBtn.addEventListener("click", ()=>{
-  keyPanel.classList.add("hidden");
-  storiesPanel.classList.remove("hidden");
-});
-
-/* attempt unlock */
-unlockBtn.addEventListener("click", ()=>{
-  const val = keyInput.value.trim();
-  if (val === ACCESS_KEY){
-    // mark unlocked
-    const arr = getUnlocked();
-    if (!arr.includes(currentStoryId)) { arr.push(currentStoryId); saveUnlocked(arr); }
-    keyPanel.classList.add("hidden");
-    openStoryView(currentStoryId);
-    return;
-  }
-  keyMsg.style.color = "#d04545";
-  keyMsg.textContent = "Wrong key. Message +2349056539307 on WhatsApp to get the key.";
-});
-
-/* open story view and generate 20 chapters */
-function openStoryView(id){
-  const idx = id - 1;
-  storyTitleEl.textContent = STORY_TITLES[idx];
-  storyAuthorEl.textContent = `By Fearless Stories`;
-  chaptersEl.innerHTML = "";
-
-  // generate 20 chapters
-  for (let ch=1; ch<=20; ch++){
-    const chapterDiv = document.createElement("div");
-    chapterDiv.className = "chapter";
-    const h4 = document.createElement("h4");
-    h4.textContent = `Chapter ${ch}`;
-    const p = document.createElement("p");
-    p.textContent = buildChapter(idx+1, ch); // generated paragraph
-    chapterDiv.appendChild(h4);
-    chapterDiv.appendChild(p);
-    chaptersEl.appendChild(chapterDiv);
-  }
-
-  // show panels
-  keyPanel.classList.add("hidden");
-  storiesPanel.classList.add("hidden");
-  storyView.classList.remove("hidden");
-  // scroll to top for mobile convenience
-  window.scrollTo({top:0,behavior:"smooth"});
+/* fetch English reference */
+async function fetchEnglishReference(reference){
+  const url = `https://bible-api.com/${encodeURIComponent(reference)}`;
+  const r = await fetch(url);
+  if(!r.ok) throw new Error('English verse not found.');
+  return await r.json();
 }
 
-/* back navigation */
-document.getElementById("backToListBtn").addEventListener("click", ()=>{
-  storyView.classList.add("hidden");
-  storiesPanel.classList.remove("hidden");
-});
-document.getElementById("homeBtn").addEventListener("click", ()=>{
-  storyView.classList.add("hidden");
-  signupPanel.classList.remove("hidden");
-});
+/* add English block */
+function addEnglishBlock(engData){
+  const block = document.createElement('div'); block.className='verse-block';
+  const h = document.createElement('div'); h.className='lang-title'; h.innerText = '🇬🇧 English';
+  block.appendChild(h);
 
-/* on load: if user exists fill login email and show login prompt */
-window.addEventListener("load", ()=>{
-  const raw = localStorage.getItem(USER_KEY);
-  if (raw){
-    try {
-      const user = JSON.parse(raw);
-      document.getElementById("signupPanel").classList.add("hidden");
-      document.getElementById("loginPanel").classList.remove("hidden");
-      document.getElementById("loginEmail").value = user.email || "";
-      document.getElementById("loginMsg").textContent = "Welcome back — enter your email to continue.";
-    } catch(e){}
+  if(Array.isArray(engData.verses) && engData.verses.length){
+    engData.verses.forEach(v=>{
+      const p = document.createElement('p');
+      p.innerHTML = `<span class="verse-num">${v.verse}</span> ${escapeHtml(v.text)}`;
+      block.appendChild(p);
+    });
+  } else if(engData.text){
+    const p = document.createElement('pre');
+    p.style.whiteSpace='pre-wrap';
+    p.style.background='transparent';
+    p.style.border='none';
+    p.style.color='inherit';
+    p.style.fontFamily='inherit';
+    p.style.fontSize='15px';
+    p.textContent = engData.text;
+    block.appendChild(p);
+  } else {
+    const p = document.createElement('div'); p.className='muted'; p.innerText='English text not available';
+    block.appendChild(p);
   }
-});
+  resultArea.appendChild(block);
+}
 
-/* set year */
-document.getElementById("year").textContent = new Date().getFullYear();
+/* parse reference */
+function parseReference(q){
+  const normalized = q.replace(/\s+/g,' ').trim();
+  const m = normalized.match(/^([1-3]?\s?[A-Za-z]+(?:\s[A-Za-z]+)*)\s+(\d+)(?::(\d+))?$/);
+  if(!m) return null;
+  return { book: m[1].trim(), chapter: m[2], verse: m[3] || null };
+}
+
+/* escape html */
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 </script>
 </body>
 </html>
