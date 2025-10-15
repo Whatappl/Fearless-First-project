@@ -1,118 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fearless WhatsApp Unban</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fearless Unban App</title>
 <style>
-body { margin:0; font-family:"Poppins",sans-serif; background:#f2f3f7; color:#333; }
-header { text-align:center; padding:25px; font-size:2em; background:#0b5ed7; color:white; font-weight:bold; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
-.container { max-width:700px; margin:30px auto; padding:20px; background:white; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
-h2 { color:#0b5ed7; margin-top:20px; }
-textarea, input, select, button { width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc; font-family:"Poppins",sans-serif; font-size:1em; }
-textarea { height:150px; resize:none; }
-button { background:#0b5ed7; color:white; border:none; cursor:pointer; transition:all 0.2s; }
-button:hover { background:#094bb5; }
-.unban-option { background:#f0f4ff; padding:12px; margin:10px 0; border-radius:8px; cursor:pointer; transition:all 0.2s; }
-.unban-option:hover { background:#d0e1ff; }
-footer { text-align:center; padding:15px; font-size:0.9em; color:#777; }
-footer span { color:#0b5ed7; font-weight:bold; }
-.version-label { font-weight:bold; color:#0b5ed7; margin-right:5px; }
+  :root{
+    --brand:#0b5ed7;
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#0b5ed7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:#111;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  header{
+    background:linear-gradient(90deg,var(--brand), #1ea7ff);
+    color:#fff;
+    padding:20px 16px;
+    text-align:center;
+    font-weight:700;
+    font-size:20px;
+    box-shadow:0 6px 18px rgba(11,94,215,0.12);
+  }
+
+  .wrap{
+    max-width:920px;
+    margin:18px auto;
+    padding:12px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:12px;
+    padding:16px;
+    box-shadow:0 6px 22px rgba(20,30,60,0.05);
+    margin-bottom:14px;
+  }
+
+  label{display:block;margin-bottom:8px;font-weight:600;color:#0f1724}
+  select,input[type="text"],input[type="email"],textarea{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid #e3e7ee;
+    background:#fff;
+    font-size:15px;
+    color:#111827;
+  }
+
+  textarea{min-height:140px; resize:vertical}
+
+  .templates{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+
+  .tpl{
+    padding:12px 14px;
+    border-radius:10px;
+    background:#f8fbff;
+    border:1px solid #e6f0ff;
+    cursor:pointer;
+    transition:transform .08s ease, box-shadow .12s ease, background .12s;
+  }
+  .tpl:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(11,94,215,0.08); background:#eef7ff}
+  .tpl.selected{background:#e6f3ff; box-shadow:0 10px 26px rgba(11,94,215,0.09); border-color:rgba(11,94,215,0.18)}
+
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1;min-width:160px}
+
+  .actions{display:flex;gap:12px;margin-top:12px;align-items:center;flex-wrap:wrap}
+  .btn{border:0;padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:700;color:#fff;background:var(--accent);box-shadow:0 8px 22px rgba(11,94,215,0.12)}
+  .btn.secondary{background:#374151}
+  .small{font-size:13px;padding:10px 12px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#111}
+
+  .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  .checklist{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+
+  footer{ text-align:center;color:var(--muted); margin:20px 0 50px; font-size:13px }
+  @media (max-width:680px){ .row{flex-direction:column} }
 </style>
 </head>
 <body>
+<header>Fearless Unban App</header>
 
-<header>Fearless WhatsApp Unban</header>
+<div class="wrap">
+  <!-- Ban type -->
+  <div class="card">
+    <label for="banType">Ban Type</label>
+    <select id="banType">
+      <option value="">— Select ban type —</option>
+      <option value="permanent">Permanent ban</option>
+      <option value="temporary">Temporary ban</option>
+    </select>
+    <p class="hint">Choose whether your account is permanently banned or temporarily restricted.</p>
+  </div>
 
-<div class="container">
-<h2>Ban Type:</h2>
-<select id="banType" onchange="loadTemplates()">
-  <option value="">-- Select Ban Type --</option>
-  <option value="permanent">Permanent Ban</option>
-  <option value="temporary">Temporary Ban</option>
-</select>
+  <!-- Templates -->
+  <div class="card">
+    <label>Choose an apology template (tap to select). You may edit the message below.</label>
+    <div id="templateList" class="templates">
+      <div class="hint" style="color:var(--muted)">Select a ban type first to view templates.</div>
+    </div>
+  </div>
 
-<h2>Choose Template:</h2>
-<div id="templateContainer"></div>
+  <!-- Input fields -->
+  <div class="card">
+    <div class="row">
+      <div class="col">
+        <label for="phone">Phone number (auto-formats to +234)</label>
+        <input id="phone" type="text" placeholder="e.g. 08131695060 or +2348131695060" />
+        <p class="hint">Start with 0 (0813...) or +234 or 234 and we'll format it to +234...</p>
+      </div>
+      <div class="col">
+        <label for="email">Your email</label>
+        <input id="email" type="email" placeholder="you@example.com" />
+      </div>
+    </div>
 
-<h2>Customize Message:</h2>
-<textarea id="messageText" placeholder="Message will appear here..."></textarea>
+    <div style="height:10px"></div>
 
-<h2>Your Phone Number:</h2>
-<input type="text" id="phoneNumber" placeholder="+234XXXXXXXXXX" oninput="updateMessageNumber()">
+    <label for="message">Apology message (editable)</label>
+    <textarea id="message" placeholder="Choose a template and it will appear here..."></textarea>
 
-<h2>Your Email:</h2>
-<input type="email" id="senderEmail" placeholder="yourname@example.com">
+    <div class="hint">Personalize the message — small personal details (dates, short context) help reviewers understand your case.</div>
+  </div>
 
-<h2>Select Support Email:</h2>
-<select id="supportEmail">
-  <option value="smb@support.whatsapp.com">smb@support.whatsapp.com</option>
-  <option value="support@whatsapp.com">support@whatsapp.com</option>
-</select>
+  <!-- Checklist & send -->
+  <div class="card">
+    <label>Before sending — helpful checklist (tick to confirm)</label>
+    <div class="checklist">
+      <label><input id="c1" type="checkbox" /> I included my correct phone number (+234 format).</label>
+      <label><input id="c2" type="checkbox" /> I wrote politely and clearly (no abusive language).</label>
+      <label><input id="c3" type="checkbox" /> I added a brief context if needed (date/time, group, short reason).</label>
+      <label><input id="c4" type="checkbox" /> I will provide verification if requested (ID, screenshots).</label>
+    </div>
 
-<button onclick="sendMail()">Send Request</button>
+    <div style="height:12px"></div>
+
+    <label for="supportTo">Support addresses (recipients)</label>
+    <input id="supportTo" type="text" value="smb@support.whatsapp.com,support@whatsapp.com" />
+
+    <div style="height:8px"></div>
+
+    <div class="row actions">
+      <button class="btn" id="openGmail">Open in Gmail Web</button>
+      <button class="btn secondary" id="openMail">Open Mail App (mailto)</button>
+      <button class="small" id="resetBtn">Reset</button>
+    </div>
+
+    <p class="hint">If Gmail web doesn't open (e.g., not signed in), try "Open Mail App". Use Chrome for best Gmail web behavior.</p>
+  </div>
+
+  <div class="card">
+    <label>Quick tips to improve your appeal</label>
+    <ul style="margin:8px 0 0 18px;color:var(--muted)">
+      <li>Be concise and honest — one short paragraph explaining the situation helps.</li>
+      <li>Include one personal reason why you need the account (work, family, urgent contacts).</li>
+      <li>Offer cooperation — include that you'll follow any verification steps.</li>
+      <li>Do not send repeated identical messages — wait for a reply.</li>
+    </ul>
+  </div>
 </div>
 
-<footer>Made by <span>Fearless</span></footer>
+<footer>Made with ♥ by <strong>Fearless</strong></footer>
 
 <script>
+/* ---------- Templates (5 long apologies each) ---------- */
 const templates = {
   permanent: [
-    "V1: Hello WhatsApp Support, I sincerely apologize for any actions that may have led to my permanent ban. My phone number is [YOUR NUMBER]. I assure you I will adhere to all guidelines and kindly request that my account be reinstated. Thank you!",
-    "V2: Dear WhatsApp Team, I realize my account has been permanently banned. I apologize for any unintentional mistakes and promise to follow all terms moving forward. My number is [YOUR NUMBER]. Please review and unban my account. Thank you!"
+`Hello WhatsApp Support Team,
+
+I respectfully request a human review of the permanent restriction placed on my account. My phone number is [PHONE]. I am deeply sorry for any behavior or content that caused this action. I value the service immensely — it is my primary tool for family, work, and essential communications.
+
+If my account violated any policy, I apologize unreservedly. I assure you the actions were not malicious and resulted from misunderstanding or error. I am prepared to cooperate fully with verification procedures, provide required documentation, or follow any remediation steps you recommend. Please consider reinstating my account or guiding me through the steps to restore access.
+
+Thank you for your time and careful consideration.
+
+Sincerely,
+[PHONE]`,
+
+`Dear WhatsApp Support,
+
+Please accept my sincere apology for the issue that led to my account being permanently banned. My number is [PHONE]. I understand the importance of platform integrity and I'm committed to adhering to all rules and community standards moving forward.
+
+The loss of access has caused significant hardship in contacting my family and handling important matters. I humbly ask for a compassionate review and the opportunity to make amends. If there are specific corrections I should make or identity checks to complete, I will comply immediately.
+
+With gratitude,
+[PHONE]`,
+
+`Hello Support Team,
+
+I am writing to appeal the permanent suspension of my account. My contact number is [PHONE]. I deeply regret the circumstances that led to this outcome. I do not dispute the need for rules, and I accept responsibility if I erred.
+
+Please allow me to explain any context you may need and advise on steps for reinstatement. I will provide identity verification and any requested evidence. I am committed to ensuring no recurrence and to following all guidelines strictly.
+
+Thank you for reviewing my request.
+
+Warm regards,
+[PHONE]`,
+
+`To Whom It May Concern at WhatsApp,
+
+I hope you are well. My account tied to [PHONE] appears to have been permanently restricted. I sincerely apologize if I violated any terms; it was never my intention to cause harm. This account is important for my daily life, and I kindly ask you to consider restoring it after a thorough review.
+
+I pledge full cooperation with any verification or remedial actions. Please let me know the next steps and documentation required — I will respond promptly.
+
+Thank you for your assistance and understanding.
+
+Respectfully,
+[PHONE]`,
+
+`Dear Team,
+
+I write with humility about the permanent ban on my WhatsApp account ([PHONE]). I regret any messages or actions that led to this. I assure you I will comply with policies and accept guidance on corrective measures.
+
+I respectfully request a review and reinstatement if appropriate. I’m ready to provide identity proof or additional context promptly. Thank you for taking the time to consider this appeal.
+
+Sincerely,
+[PHONE]`
   ],
+
   temporary: [
-    "V1: Hi WhatsApp Support, I regret any actions that caused my account to be temporarily restricted. My phone number is [YOUR NUMBER]. I request your assistance in restoring access. Thank you!",
-    "V2: Support Team, I apologize for the inconvenience caused by my temporary ban. I pledge to comply with all WhatsApp rules. My phone number is [YOUR NUMBER]. Kindly lift the restriction. Thanks!"
+`Hello WhatsApp Support Team,
+
+My WhatsApp account (number [PHONE]) appears to be temporarily restricted. I sincerely apologize for any actions that triggered this restriction. I rely on WhatsApp for urgent communications, and the restriction has affected important contacts.
+
+I understand and respect your policies. Please consider lifting the restriction after review — I will ensure strict adherence to the rules. I am available to provide any necessary verification or clarification.
+
+Thank you kindly for your help.
+
+Best regards,
+[PHONE]`,
+
+`Dear WhatsApp Team,
+
+I am writing to request assistance with a temporary ban affecting my account [PHONE]. I regret any unintentional error and apologize for any inconvenience caused. Please guide me on the steps to restore access — I am ready to comply with verification and any required processes.
+
+Your support in quickly restoring this account would be greatly appreciated.
+
+Warmly,
+[PHONE]`,
+
+`Hi Support,
+
+Please assist with the temporary restriction on my phone number [PHONE]. I apologize for any mistakes and pledge to follow the community guidelines going forward. If I need to provide identity proof or other information, I will do so immediately.
+
+Thank you for considering my appeal.
+
+Sincerely,
+[PHONE]`,
+
+`Support Team,
+
+My account (number [PHONE]) has been temporarily blocked. I'm sorry for whatever caused this and I request that the restriction be reviewed. I will cooperate fully with any checks and follow recommended steps to reinstate my account.
+
+Thanks in advance,
+[PHONE]`,
+
+`Hello,
+
+I noticed my WhatsApp account [PHONE] is currently restricted temporarily. I sincerely apologize and request a prompt review. I'm willing to provide clarifications, verification, or follow steps you advise to restore access quickly.
+
+Thank you for your time and help,
+[PHONE]`
   ]
 };
 
-let selectedTemplate = "";
+/* ---------- UI refs ---------- */
+const banTypeEl = document.getElementById('banType');
+const templateListEl = document.getElementById('templateList');
+const phoneEl = document.getElementById('phone');
+const emailEl = document.getElementById('email');
+const messageEl = document.getElementById('message');
+const supportToEl = document.getElementById('supportTo');
+const openGmailBtn = document.getElementById('openGmail');
+const openMailBtn = document.getElementById('openMail');
+const resetBtn = document.getElementById('resetBtn');
+const checklist = [document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3'), document.getElementById('c4')];
 
-// Load templates for chosen ban type
-function loadTemplates(){
-  const type = document.getElementById("banType").value;
-  const container = document.getElementById("templateContainer");
-  container.innerHTML = "";
-  selectedTemplate = "";
-  document.getElementById("messageText").value = "";
+let currentTplIndex = -1;
+let currentList = [];
 
-  if(!type) return;
+/* ---------- Populate templates when ban type changes ---------- */
+banTypeEl.addEventListener('change', () => {
+  populateTemplates();
+  currentTplIndex = -1;
+  messageEl.value = '';
+});
 
-  templates[type].forEach((text,index)=>{
-    const div = document.createElement("div");
-    div.className = "unban-option";
-    div.innerHTML = `<span class="version-label">V${index+1}:</span> ${text}`;
-    div.onclick = ()=>{
-      selectedTemplate = text;
-      updateMessageNumber();
-    };
-    container.appendChild(div);
+function populateTemplates(){
+  templateListEl.innerHTML = '';
+  const type = banTypeEl.value;
+  if(!type){
+    templateListEl.innerHTML = '<div class="hint" style="color:var(--muted)">Select a ban type to see templates.</div>';
+    return;
+  }
+  currentList = templates[type] || [];
+  currentList.forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'tpl';
+    d.innerText = t.replace(/\[PHONE\]/g,'[PHONE]');
+    d.addEventListener('click', ()=> selectTemplate(i));
+    templateListEl.appendChild(d);
   });
 }
 
-// Update message with current phone number
-function updateMessageNumber(){
-  if(!selectedTemplate) return;
-  const number = document.getElementById("phoneNumber").value || "[YOUR NUMBER]";
-  document.getElementById("messageText").value = selectedTemplate.replace("[YOUR NUMBER]", number);
+/* ---------- Select template ---------- */
+function selectTemplate(idx){
+  currentTplIndex = idx;
+  Array.from(templateListEl.children).forEach((el, i)=> el.classList.toggle('selected', i===idx));
+  applyTemplateToMessage();
 }
 
-// Send email via default mail client
-function sendMail(){
-  const number = document.getElementById("phoneNumber").value.trim();
-  const sender = encodeURIComponent(document.getElementById("senderEmail").value.trim());
-  const support = document.getElementById("supportEmail").value;
-  const message = encodeURIComponent(document.getElementById("messageText").value.trim());
+/* ---------- Format Nigerian phone to +234... ---------- */
+function formatToE164Nigeria(raw){
+  if(!raw) return '';
+  let s = String(raw).trim();
+  // remove non digits and plus
+  s = s.replace(/[^\d+]/g,'');
+  // if starts with +
+  if(s.startsWith('+')){
+    // if +234 already ok
+    if(s.startsWith('+234')) return s;
+    // if +0 or other, just return as typed
+    return s;
+  }
+  // starts with 0 like 0813...
+  if(s.startsWith('0')){
+    // remove leading 0 and prepend +234
+    return '+234' + s.slice(1);
+  }
+  // starts with 234
+  if(s.startsWith('234')){
+    return '+' + s;
+  }
+  // starts with others: assume local and prefix with +234
+  if(s.length>6 && !s.startsWith('0') && !s.startsWith('234')) {
+    return '+234' + s;
+  }
+  return s;
+}
 
-  if(!number || !sender || !message){
-    alert("Please select a template, enter your phone number, email, and ensure message is not empty.");
-    return;
+/* live phone formatting: keep caret reasonably */
+phoneEl.addEventListener('input', ()=>{
+  const raw = phoneEl.value;
+  const formatted = formatToE164Nigeria(raw);
+  // only change value if it differs to avoid interfering with typing too much
+  if(formatted && formatted !== raw){
+    phoneEl.value = formatted;
+  }
+  // update message phone placeholder if template selected
+  if(currentTplIndex >= 0) applyTemplateToMessage();
+});
+
+/* ---------- Apply template & replace placeholder ---------- */
+function applyTemplateToMessage(){
+  if(currentTplIndex < 0) return;
+  const type = banTypeEl.value;
+  if(!type) return;
+  const tpl = currentList[currentTplIndex];
+  const phone = phoneEl.value.trim() || '[PHONE]';
+  const filled = tpl.replace(/\[PHONE\]/g, phone);
+  messageEl.value = filled;
+  // bring message into view on mobile
+  messageEl.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+/* live update when phone changes */
+phoneEl.addEventListener('blur', ()=> { if(currentTplIndex>=0) applyTemplateToMessage(); });
+
+/* ---------- Reset ---------- */
+resetBtn.addEventListener('click', ()=> {
+  banTypeEl.value = '';
+  templateListEl.innerHTML = '<div class="hint" style="color:var(--muted)">Select a ban type to see templates.</div>';
+  phoneEl.value = '';
+  emailEl.value = '';
+  messageEl.value = '';
+  supportToEl.value = 'smb@support.whatsapp.com,support@whatsapp.com';
+  checklist.forEach(c=>c.checked=false);
+  currentTplIndex = -1;
+  currentList = [];
+});
+
+/* ---------- Helpers for encoding ---------- */
+function safeEncode(s){ return encodeURIComponent(s).replace(/ /g, '+'); }
+
+/* ---------- Send to Gmail Web Compose ---------- */
+openGmailBtn.addEventListener('click', ()=>{
+  const to = supportToEl.value.trim();
+  let body = messageEl.value.trim();
+  const subjNumber = phoneEl.value.trim() || 'Account';
+  const subject = `Unban Request for ${subjNumber}`;
+
+  // basic validation
+  if(!to){ alert('Please provide at least one support address.'); return; }
+  if(!body){ alert('Please select a template or write a message first.'); return; }
+  if(!phoneEl.value.trim()){ if(!confirm('Phone number is empty. Continue without phone?')) return; }
+
+  // if checklist present, encourage checking
+  if(!checklist.every(c=>c.checked)){
+    if(!confirm('It looks like you did not complete all checklist items. Continue anyway?')) {}
   }
 
-  window.location.href = `mailto:${support}?subject=Unban Request from ${sender}&body=${message}`;
-}
-</script>
+  const sender = emailEl.value.trim();
+  if(sender) body = `Sender Email: ${sender}\n\n${body}`;
 
+  const params = [
+    'view=cm','fs=1',
+    'to=' + encodeURIComponent(to),
+    'su=' + encodeURIComponent(subject),
+    'body=' + encodeURIComponent(body)
+  ].join('&');
+
+  const url = 'https://mail.google.com/mail/?' + params;
+  window.open(url, '_blank');
+});
+
+/* ---------- Send via mailto fallback ---------- */
+openMailBtn.addEventListener('click', ()=>{
+  const to = supportToEl.value.trim();
+  let body = messageEl.value.trim();
+  const subjNumber = phoneEl.value.trim() || 'Account';
+  const subject = `Unban Request for ${subjNumber}`;
+
+  if(!to){ alert('Please provide at least one support address.'); return; }
+  if(!body){ alert('Message empty — please select a template or write a message.'); return; }
+  if(!phoneEl.value.trim()){ if(!confirm('Phone number empty — continue?')) {} }
+
+  const sender = emailEl.value.trim();
+  if(sender) body = `Sender Email: ${sender}\n\n${body}`;
+
+  const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  // use location.href to trigger mail app
+  window.location.href = mailto;
+});
+
+/* init */
+populateTemplates();
+</script>
 </body>
 </html>
