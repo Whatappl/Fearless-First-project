@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fearless Sensi Panel - FF Sensi Hub</title>
+    <title>Fearless xit - Elite FF Sensi Hub</title>
     <style>
         :root {
             --primary: #ff5500;
             --primary-glow: rgba(255, 85, 0, 0.3);
             --whatsapp: #25D366;
             --whatsapp-glow: rgba(37, 211, 102, 0.2);
-            --card-bg: rgba(15, 15, 18, 0.95);
+            --card-bg: rgba(15, 15, 18, 0.85);
             --text-main: #ffffff;
             --text-muted: #9fa0a6;
-            --accent: #00ff66;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: linear-gradient(rgba(11, 11, 13, 0.7), rgba(11, 11, 13, 0.9)), url('3959.jpg');
+            background: linear-gradient(rgba(11, 11, 13, 0.65), rgba(11, 11, 13, 0.85)), url('3959.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-repeat: no-repeat;
             color: var(--text-main);
             min-height: 100vh;
             padding: 20px;
@@ -43,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(11, 11, 13, 0.95), rgba(11, 11, 13, 0.98)), url('3959.jpg');
+            background: linear-gradient(rgba(11, 11, 13, 0.9), rgba(11, 11, 13, 0.95)), url('3959.jpg');
             background-size: cover;
             background-position: center;
             z-index: 9999;
@@ -52,12 +52,13 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         .login-box {
             width: 100%;
             max-width: 400px;
-            background: rgba(20, 20, 25, 0.95);
+            background: rgba(20, 20, 25, 0.9);
             border-radius: 16px;
             padding: 30px;
             box-shadow: 0 0 30px rgba(255, 85, 0, 0.2);
@@ -78,14 +79,14 @@
 
         .login-box p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 25px;
         }
 
         #mainContent {
             display: none;
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
             flex-direction: column;
             align-items: center;
         }
@@ -96,11 +97,13 @@
         }
 
         header h1 {
-            font-size: 2.4rem;
-            font-weight: 900;
+            color: var(--text-main);
+            font-size: 2.8rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-shadow: 0 0 20px var(--primary-glow);
+            margin-bottom: 5px;
         }
 
         header h1 span {
@@ -110,17 +113,21 @@
         header p {
             color: var(--text-muted);
             font-size: 1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .live-counter {
             background: rgba(0, 255, 102, 0.1);
-            color: var(--accent);
+            color: #00ff66;
             padding: 10px 20px;
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 25px;
             border: 1px solid rgba(0, 255, 102, 0.3);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.1);
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -129,7 +136,7 @@
         .pulse-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--accent);
+            background-color: #00ff66;
             border-radius: 50%;
             animation: pulse 1.5s infinite;
         }
@@ -144,58 +151,75 @@
             width: 100%;
             background: var(--card-bg);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
             text-align: left;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
             color: var(--text-muted);
         }
 
         input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 15px;
-            background: rgba(10, 10, 12, 0.9);
+            padding: 16px;
+            background: rgba(10, 10, 12, 0.85);
             border: 2px solid rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             outline: none;
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus, input[type="password"]:focus {
             border-color: var(--primary);
             box-shadow: 0 0 15px var(--primary-glow);
+            background: rgba(20, 20, 25, 0.95);
         }
 
         .get-key-hint {
-            display: inline-block;
+            display: block;
             margin-top: 8px;
             font-size: 0.85rem;
             color: #ffaa00;
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.2s ease;
         }
 
         .get-key-hint:hover {
+            color: #ffcc00;
             text-decoration: underline;
         }
 
-        button, .btn-link {
-            display: block;
+        button {
             width: 100%;
             padding: 16px;
             font-size: 1.1rem;
@@ -203,41 +227,63 @@
             border-radius: 10px;
             cursor: pointer;
             text-transform: uppercase;
+            transition: all 0.3s ease;
             border: none;
             letter-spacing: 1px;
-            transition: 0.2s ease;
-            text-align: center;
-            text-decoration: none;
-            box-sizing: border-box;
         }
 
         .btn-join {
             background: linear-gradient(135deg, #00ff66 0%, #00b344 100%);
             color: #000;
+            box-shadow: 0 6px 20px rgba(0, 255, 102, 0.2);
             margin-bottom: 20px;
+        }
+
+        .btn-join:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 102, 0.4);
         }
 
         .btn-auth {
             background: linear-gradient(135deg, #ff5500 0%, #ff2200 100%);
             color: white;
-            margin-top: 10px;
+            box-shadow: 0 6px 20px var(--primary-glow);
+            margin-top: 15px;
+        }
+
+        .btn-auth:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 85, 0, 0.5);
         }
 
         .btn-auth:disabled {
-            background: #333;
+            background: #333338;
             color: #666;
             cursor: not-allowed;
+            box-shadow: none;
         }
 
         .btn-share {
             background: linear-gradient(135deg, #25D366 0%, #1ebd54 100%);
             color: white;
+            box-shadow: 0 6px 20px var(--whatsapp-glow);
+        }
+
+        .btn-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
         }
 
         .btn-generate {
             background: linear-gradient(135deg, #ff5500 0%, #ff2200 100%);
             color: white;
+            box-shadow: 0 6px 20px var(--primary-glow);
             display: none;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 85, 0, 0.5);
         }
 
         .share-status-container {
@@ -245,6 +291,7 @@
             background: rgba(0, 0, 0, 0.5);
             border-radius: 8px;
             padding: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .share-status {
@@ -267,27 +314,34 @@
             width: 0%;
             height: 100%;
             background: linear-gradient(90deg, #ffcc00, #25D366);
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
 
         .result-box {
             display: none;
-            margin-top: 25px;
-            background: rgba(0,0,0,0.5);
+            margin-top: 35px;
+            background: rgba(0,0,0,0.4);
             border-radius: 14px;
             padding: 20px;
-            border: 1px dashed var(--primary);
+            border: 1px dashed rgba(255, 85, 0, 0.4);
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .result-title {
             font-size: 1.25rem;
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
+            font-weight: 700;
         }
 
         .result-title span {
-            color: #00f0ff;
+            color: var(--primary);
         }
 
         .sensi-grid {
@@ -299,48 +353,59 @@
         .sensi-row {
             display: flex;
             flex-direction: column;
-            background: rgba(20, 20, 25, 0.9);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(20, 20, 25, 0.8);
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
         }
 
         .sensi-name {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin-bottom: 4px;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         .sensi-value {
-            color: var(--accent);
-            font-weight: 900;
-            font-size: 1.5rem;
+            color: #00ff66;
+            font-weight: 800;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
         }
 
         .dpi-note {
             grid-column: span 2;
-            margin-top: 5px;
-            background: rgba(255, 85, 0, 0.1);
+            margin-top: 8px;
+            background: rgba(255, 85, 0, 0.12);
             border-left: 4px solid var(--primary);
-            padding: 12px;
+            padding: 15px;
             font-size: 0.9rem;
-            color: #ffba9c;
-            border-radius: 0 8px 8px 0;
+            color: #ffaa85;
+            border-radius: 0 10px 10px 0;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
         .contact-box {
             margin-top: 30px;
-            padding-top: 20px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+        }
+
+        .contact-box h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .links-flex {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
         }
 
         .owner-link {
@@ -353,6 +418,7 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
         .link-channel {
@@ -361,13 +427,26 @@
             border: 1px solid rgba(255, 85, 0, 0.3);
         }
 
+        .link-channel:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 5px 15px var(--primary-glow);
+        }
+
         .link-whatsapp {
             background: rgba(37, 211, 102, 0.1);
             color: #2be472;
             border: 1px solid rgba(37, 211, 102, 0.3);
         }
 
+        .link-whatsapp:hover {
+            background: var(--whatsapp);
+            color: #fff;
+            box-shadow: 0 5px 15px var(--whatsapp-glow);
+        }
+
         @media (max-width: 480px) {
+            header h1 { font-size: 2.1rem; }
             .sensi-grid { grid-template-columns: 1fr; }
             .dpi-note { grid-column: span 1; }
         }
@@ -375,72 +454,69 @@
 </head>
 <body>
 
-    <!-- Step 1: Login Screen -->
     <div id="loginOverlay">
         <div class="login-box">
-            <h2>Fearless <span>Sensi Panel</span></h2>
-            <p>Join channel to unlock your daily key</p>
+            <h2>Fearless <span>xit</span></h2>
+            <p style="margin-bottom: 15px;">Step 1: Join Channel to Unlock Entry</p>
             
-            <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="btn-link btn-join" onclick="enableKeyInput()">STEP 1: JOIN CHANNEL 📢</a>
+            <button class="btn-join" onclick="joinChannelFirst()">Step 1: Join Official Channel 📢</button>
             
             <div class="form-group">
-                <label>Step 2: Enter Key:</label>
-                <input type="text" id="loginKey" placeholder="Join channel to see key..." disabled>
-                <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="get-key-hint">🔗 Get Key Here</a>
+                <label>Step 2: Enter Access Key:</label>
+                <input type="password" id="loginKey" placeholder="Join channel first to unlock..." disabled>
+                <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="get-key-hint">🔗 Get key from channel</a>
             </div>
             
-            <button class="btn-auth" id="authSubmitBtn" onclick="validateAccess()" disabled>Login Menu</button>
+            <button class="btn-auth" id="authSubmitBtn" onclick="validateAccess()" disabled>Access Hub</button>
         </div>
     </div>
 
-    <!-- Main Content Panel -->
     <div id="mainContent">
         <header>
-            <h1>Fearless <span>Sensi</span></h1>
-            <p>Auto-Headshot Menu Tool</p>
+            <h1>Fearless <span>xit</span> Sensi</h1>
+            <p>Premium Auto-Headshot Configuration Tool</p>
         </header>
 
         <div class="live-counter">
             <div class="pulse-dot"></div>
-            <span><strong id="userCount">16,300</strong> players active now</span>
+            <span><strong id="userCount">16,300</strong> Free Fire configs initialized today</span>
         </div>
 
         <div class="container">
             <div class="form-group">
-                <label for="deviceName">Your Phone Name:</label>
-                <input type="text" id="deviceName" placeholder="e.g., iPhone 14, Infinix Hot 40, Samsung A32">
+                <label for="deviceName">Target Hardware Device:</label>
+                <input type="text" id="deviceName" placeholder="Type Phone model (e.g., iPhone 14 Pro, Infinix Hot 40)">
             </div>
 
             <button id="shareButton" class="btn-share" onclick="shareToWhatsApp()">🚀 Share to 5 WhatsApp Groups to Unlock</button>
-            <button id="generateButton" class="btn-generate" onclick="getSensitivity()">⚡ Get Best Settings Now</button>
+            <button id="generateButton" class="btn-generate" onclick="getSensitivity()">⚡ Inject Sensitivity Database</button>
             
             <div class="share-status-container">
-                <div id="shareStatus" class="share-status">Shares completed: 0 / 5 Groups</div>
+                <div id="shareStatus" class="share-status">Verification Status: 0 / 5 Group Shares</div>
                 <div class="progress-bar">
                     <div id="progressFill" class="progress-fill"></div>
                 </div>
             </div>
 
-            <!-- Settings Result Box -->
             <div class="result-box" id="resultBox">
-                <h3 class="result-title">Best Settings For: <span id="deviceTitle">Device</span></h3>
+                <h3 class="result-title">Optimized Registry for: <span id="deviceTitle">Device</span></h3>
                 
                 <div class="sensi-grid">
-                    <div class="sensi-row"><span class="sensi-name">General</span><span class="sensi-value" id="gen">0</span></div>
-                    <div class="sensi-row"><span class="sensi-name">Red Dot</span><span class="sensi-value" id="red">0</span></div>
-                    <div class="sensi-row"><span class="sensi-name">2x Scope</span><span class="sensi-value" id="sc2">0</span></div>
-                    <div class="sensi-row"><span class="sensi-name">4x Scope</span><span class="sensi-value" id="sc4">0</span></div>
+                    <div class="sensi-row"><span class="sensi-name">General Sensi</span><span class="sensi-value" id="gen">0</span></div>
+                    <div class="sensi-row"><span class="sensi-name">Red Dot Sight</span><span class="sensi-value" id="red">0</span></div>
+                    <div class="sensi-row"><span class="sensi-name">2x Scope Elite</span><span class="sensi-value" id="sc2">0</span></div>
+                    <div class="sensi-row"><span class="sensi-name">4x Scope Elite</span><span class="sensi-value" id="sc4">0</span></div>
                     <div class="sensi-row"><span class="sensi-name">AWM Sniper</span><span class="sensi-value" id="snip">0</span></div>
-                    <div class="sensi-row"><span class="sensi-name">Free Look</span><span class="sensi-value" id="free">0</span></div>
+                    <div class="sensi-row"><span class="sensi-name">Free Look Cam</span><span class="sensi-value" id="free">0</span></div>
                     <div class="dpi-note" id="dpiNote"></div>
                 </div>
             </div>
 
             <div class="contact-box">
-                <h4>Official Group Links</h4>
+                <h4>Official Links & Support</h4>
                 <div class="links-flex">
-                    <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="owner-link link-channel">📢 Join Official Channel</a>
-                    <a href="https://wa.me/2349137895828" target="_blank" class="owner-link link-whatsapp">💬 Chat with Owner</a>
+                    <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="owner-link link-channel">📢 Join Official Fearless xit Channel</a>
+                    <a href="https://wa.me/2349137895828" target="_blank" class="owner-link link-whatsapp">💬 Contact Direct Mod Support</a>
                 </div>
             </div>
         </div>
@@ -452,7 +528,8 @@
         let channelJoined = false;
         const channelLink = "https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E";
 
-        function enableKeyInput() {
+        function joinChannelFirst() {
+            window.open(channelLink, '_blank');
             channelJoined = true;
             document.getElementById('loginKey').disabled = false;
             document.getElementById('loginKey').placeholder = "Type key here...";
@@ -461,16 +538,18 @@
 
         function validateAccess() {
             if (!channelJoined) {
-                alert("⚠️ You must click 'JOIN CHANNEL' first!");
+                alert("⚠️ System Error: You must click 'Join Official Channel' first!");
                 return;
             }
             const keyIn = document.getElementById('loginKey').value.trim().toLowerCase();
             if (keyIn === "fearless xits") {
-                document.getElementById('loginOverlay').style.display = 'none';
+                const overlay = document.getElementById('loginOverlay');
+                overlay.style.opacity = '0';
+                overlay.style.visibility = 'hidden';
                 document.getElementById('mainContent').style.display = 'flex';
                 setupLiveCounter();
             } else {
-                alert("❌ Wrong Key! Go to our channel to find the right key.");
+                alert("❌ Access Denied: Invalid Security Key!");
             }
         }
 
@@ -486,19 +565,20 @@
         function shareToWhatsApp() {
             const device = document.getElementById('deviceName').value.trim();
             if (!device) {
-                alert('Please enter your Phone Name first!');
+                alert('Please provide your Device model configuration name first!');
                 return;
             }
 
             if (!isValidDeviceName(device)) {
-                alert("❌ Wrong Device: Please type a real phone name (like iPhone, Infinix, Tecno, Samsung)!");
+                alert("❌ Verification Failed: Please enter a valid device name (e.g., iPhone 14, Infinix, Samsung, etc.). Random text is not allowed.");
                 return;
             }
 
-            const rawText = ````😈ALL IOS AND ANDROID VERSIONS DEVICE SENSITIVITY 💯🗿``\n\n*Sensitivity Site :* ${window.location.href}\n\n*Join Fearless Xit Official Channel For Daily  Regedit and Files 👇🫶*\n${channelLink}`;
+            // Customized share message featuring your brand tagline text configuration directly
+            const rawText = `😈ALL IOS AND ANDROID VERSIONS DEVICE SENSITIVITY 💯🗿\n\n😱 Omg! 100% Auto-Headshot Sensitivity Panel! Get yours instantly here 👇\n${window.location.href}\n\n🎁 Join Fearless xit Official Channel for Daily Regedit & VIP Configurations! 👇\n${channelLink}`;
             const encodedText = encodeURIComponent(rawText);
 
-            window.open(`[https://wa.me/?text=$](https://wa.me/?text=$){encodedText}`, '_blank');
+            window.open(`https://wa.me/?text=${encodedText}`, '_blank');
             shareCount++;
             
             const statusText = document.getElementById('shareStatus');
@@ -510,11 +590,62 @@
             fill.style.width = `${Math.min(percentage, 100)}%`;
 
             if (shareCount < requiredShares) {
-                statusText.textContent = `Shares completed: ${shareCount} / ${requiredShares} Groups`;
+                statusText.textContent = `Verification Status: ${shareCount} / ${requiredShares} Group Shares`;
             } else {
-                statusText.textContent = "✅ Verification Done! Settings unlocked.";
+                statusText.textContent = "✅ Security Check Cleared! System Ready.";
                 statusText.style.color = "#00ff66";
                 shareBtn.style.display = "none";
                 generateBtn.style.display = "block";
             }
         }
+
+        function isValidDeviceName(name) {
+            const inputLower = name.toLowerCase();
+            const brandKeywords = [
+                'iphone', 'ipad', 'apple', 'infinix', 'tecno', 'samsung', 'galaxy', 
+                'xiaomi', 'redmi', 'poco', 'mi', 'vivo', 'oppo', 'realme', 'oneplus', 
+                'huawei', 'honor', 'motorola', 'moto', 'asus', 'rog', 'sony', 'xperia', 
+                'google', 'pixel', 'itel', 'nokia', 'lg', 'lenovo', 'htc'
+            ];
+            return brandKeywords.some(keyword => inputLower.includes(keyword));
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getSensitivity() {
+            const device = document.getElementById('deviceName').value.trim();
+
+            if (!isValidDeviceName(device)) {
+                alert("❌ Configuration Blocked: Invalid hardware model detected. Enter a real device name.");
+                document.getElementById('resultBox').style.display = 'none';
+                return;
+            }
+
+            const gen = getRandomInt(180, 200);
+            const red = getRandomInt(175, 195);
+            const sc2 = getRandomInt(170, 190);
+            const sc4 = getRandomInt(165, 185);
+            const snip = getRandomInt(90, 115);
+            const free = getRandomInt(140, 180);
+            
+            const dpis = [411, 440, 480, 500, 525];
+            const chosenDpi = dpis[Math.floor(Math.random() * dpis.length)];
+            const chosenFireBtn = getRandomInt(42, 49);
+
+            document.getElementById('deviceTitle').textContent = device;
+            document.getElementById('gen').textContent = gen;
+            document.getElementById('red').textContent = red;
+            document.getElementById('sc2').textContent = sc2;
+            document.getElementById('sc4').textContent = sc4;
+            document.getElementById('snip').textContent = snip;
+            document.getElementById('free').textContent = free;
+            document.getElementById('dpiNote').textContent = `🔥 Fearless xit Database Verdict: Set System DPI to ${chosenDpi}. Optimal Right Fire-Button Layout Size at ${chosenFireBtn}%. Drag smoothly from lower layout quadrant.`;
+
+            document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
