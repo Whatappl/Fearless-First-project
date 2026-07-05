@@ -385,7 +385,7 @@
             
             <div class="form-group">
                 <label>Step 2: Enter Key:</label>
-                <input type="password" id="loginKey" placeholder="Join channel to see key..." disabled>
+                <input type="text" id="loginKey" placeholder="Join channel to see key..." disabled>
                 <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="get-key-hint">🔗 Get Key Here</a>
             </div>
             
@@ -495,7 +495,6 @@
                 return;
             }
 
-            // Exactly as requested formatted message format
             const rawText = ````😈ALL IOS AND ANDROID VERSIONS DEVICE SENSITIVITY 💯🗿``\n\n*Sensitivity Site :* ${window.location.href}\n\n*Join Fearless Xit Official Channel For Daily  Regedit and Files 👇🫶*\n${channelLink}`;
             const encodedText = encodeURIComponent(rawText);
 
@@ -519,54 +518,3 @@
                 generateBtn.style.display = "block";
             }
         }
-
-        function isValidDeviceName(name) {
-            const inputLower = name.toLowerCase();
-            const brandKeywords = [
-                'iphone', 'ipad', 'apple', 'infinix', 'tecno', 'samsung', 'galaxy', 
-                'xiaomi', 'redmi', 'poco', 'mi', 'vivo', 'oppo', 'realme', 'oneplus', 
-                'huawei', 'honor', 'motorola', 'moto', 'asus', 'rog', 'sony', 'xperia', 
-                'google', 'pixel', 'itel', 'nokia', 'lg', 'lenovo', 'htc'
-            ];
-            return brandKeywords.some(keyword => inputLower.includes(keyword));
-        }
-
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function getSensitivity() {
-            const device = document.getElementById('deviceName').value.trim();
-
-            if (!isValidDeviceName(device)) {
-                alert("❌ Enter a real phone name.");
-                document.getElementById('resultBox').style.display = 'none';
-                return;
-            }
-
-            const gen = getRandomInt(180, 200);
-            const red = getRandomInt(175, 195);
-            const sc2 = getRandomInt(170, 190);
-            const sc4 = getRandomInt(165, 185);
-            const snip = getRandomInt(90, 115);
-            const free = getRandomInt(140, 180);
-            
-            const dpis = [411, 440, 480, 500, 525];
-            const chosenDpi = dpis[Math.floor(Math.random() * dpis.length)];
-            const chosenFireBtn = getRandomInt(42, 49);
-
-            document.getElementById('deviceTitle').textContent = device;
-            document.getElementById('gen').textContent = gen;
-            document.getElementById('red').textContent = red;
-            document.getElementById('sc2').textContent = sc2;
-            document.getElementById('sc4').textContent = sc4;
-            document.getElementById('snip').textContent = snip;
-            document.getElementById('free').textContent = free;
-            document.getElementById('dpiNote').textContent = `🔥 Tip: Set your phone DPI to ${chosenDpi}. Set Fire Button size to ${chosenFireBtn}%. Drag up quickly for pure red numbers!`;
-
-            document.getElementById('resultBox').style.display = 'block';
-            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
