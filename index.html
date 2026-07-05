@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fearless xit - Elite FF Sensi Hub</title>
+    <title>Fearless Sensi Panel - Elite FF Hub</title>
     <style>
         :root {
             --primary: #ff5500;
@@ -66,7 +66,7 @@
         }
 
         .login-box h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 5px;
@@ -96,7 +96,7 @@
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -192,7 +192,7 @@
         }
 
         .get-key-hint {
-            display: block;
+            display: inline-block;
             margin-top: 8px;
             font-size: 0.85rem;
             color: #ffaa00;
@@ -239,7 +239,8 @@
             cursor: pointer;
         }
 
-        button {
+        button, .btn-link {
+            display: block;
             width: 100%;
             padding: 16px;
             font-size: 1.1rem;
@@ -250,6 +251,9 @@
             border: none;
             letter-spacing: 1px;
             transition: 0.2s ease;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
         }
 
         .btn-join {
@@ -281,7 +285,6 @@
             display: none;
         }
 
-        /* Console Box */
         .console-box {
             display: none;
             background: #000;
@@ -437,10 +440,11 @@
     <!-- Step 1: Login Overlay -->
     <div id="loginOverlay">
         <div class="login-box">
-            <h2>Fearless <span>xit</span></h2>
+            <h2>Fearless <span>Sensi Panel</span></h2>
             <p>Unlock Sensitivity Panel</p>
             
-            <button class="btn-join" onclick="joinChannelFirst()">Step 1: Join Channel 📢</button>
+            <!-- Safe anchor link to guarantee block-free browser navigation -->
+            <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="btn-link btn-join" onclick="enableKeyInput()">STEP 1: JOIN CHANNEL 📢</a>
             
             <div class="form-group">
                 <label>Step 2: Enter Access Key:</label>
@@ -455,7 +459,7 @@
     <!-- Main Content Panel -->
     <div id="mainContent">
         <header>
-            <h1>Fearless <span>xit</span></h1>
+            <h1>Fearless <span>Sensi Panel</span></h1>
             <p>Auto-Headshot Panel Menu</p>
         </header>
 
@@ -554,8 +558,7 @@
         const channelLink = "https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E";
         let shareActive = false;
 
-        function joinChannelFirst() {
-            window.open(channelLink, '_blank');
+        function enableKeyInput() {
             channelJoined = true;
             document.getElementById('loginKey').disabled = false;
             document.getElementById('loginKey').placeholder = "Enter Key...";
@@ -594,11 +597,10 @@
             }
 
             if (!isValidDeviceName(device)) {
-                alert("❌ Error: Please type a real phone brand name (e.g. iPhone, Infinix, Samsung, Techno)!");
+                alert("❌ Error: Please type a real phone brand name (e.g. iPhone, Infinix, Samsung, Tecno)!");
                 return;
             }
 
-            // Exactly the custom text format requested
             const rawText = ````😈ALL IOS AND ANDROID VERSIONS DEVICE SENSITIVITY 💯🗿``\n\n*Sensitivity Site :* ${window.location.href}\n\n*Join Fearless Xit Official Channel For Daily  Regedit and Files 👇🫶*\n${channelLink}`;
             const encodedText = encodeURIComponent(rawText);
 
@@ -606,12 +608,10 @@
             window.open(`[https://wa.me/?text=$](https://wa.me/?text=$){encodedText}`, '_blank');
         }
 
-        // Fixes the forward logic immediately when the user returns
         window.addEventListener('focus', () => {
             if (!shareActive) return;
             shareActive = false;
 
-            // Instantly gives progress point when returning from WhatsApp
             shareCount++;
             
             const statusText = document.getElementById('shareStatus');
@@ -689,28 +689,4 @@
 
             const gen = getRandomInt(185, 200);
             const red = getRandomInt(180, 198);
-            const sc2 = getRandomInt(175, 195);
-            const sc4 = getRandomInt(170, 190);
-            const snip = getRandomInt(95, 120);
-            const free = getRandomInt(150, 185);
-            
-            const dpis = [420, 460, 480, 500, 520];
-            const chosenDpi = dpis[Math.floor(Math.random() * dpis.length)];
-            const chosenFireBtn = getRandomInt(42, 48);
-
-            document.getElementById('deviceTitle').textContent = device + ` (${fpsValue}FPS Mode)`;
-            document.getElementById('gen').textContent = gen;
-            document.getElementById('red').textContent = red;
-            document.getElementById('sc2').textContent = sc2;
-            document.getElementById('sc4').textContent = sc4;
-            document.getElementById('snip').textContent = snip;
-            document.getElementById('free').textContent = free;
-            
-            document.getElementById('dpiNote').textContent = `🔥 Hack Verdict: Set your phone DPI to ${chosenDpi}. Keep your Fire Button size at ${chosenFireBtn}%. Drag up fast from the middle layout position for pure red numbers!`;
-
-            document.getElementById('resultBox').style.display = 'block';
-            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
+            const sc2 =
