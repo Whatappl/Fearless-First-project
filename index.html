@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fearless Sensi Panel - Elite FF Hub</title>
+    <title>Fearless Sensi Panel - FF Sensi Hub</title>
     <style>
         :root {
             --primary: #ff5500;
@@ -151,16 +151,6 @@
             position: relative;
         }
 
-        .panel-title {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #fff;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
         .form-group {
             margin-bottom: 20px;
             text-align: left;
@@ -175,7 +165,7 @@
             color: var(--text-muted);
         }
 
-        input[type="text"], input[type="password"], select {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 15px;
             background: rgba(10, 10, 12, 0.9);
@@ -186,7 +176,7 @@
             outline: none;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus, select:focus {
+        input[type="text"]:focus, input[type="password"]:focus {
             border-color: var(--primary);
             box-shadow: 0 0 15px var(--primary-glow);
         }
@@ -202,41 +192,6 @@
 
         .get-key-hint:hover {
             text-decoration: underline;
-        }
-
-        .two-columns {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .setting-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(0,0,0,0.4);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 10px;
-        }
-
-        .setting-info h5 {
-            color: #fff;
-            font-size: 0.95rem;
-            margin-bottom: 2px;
-        }
-
-        .setting-info p {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-        }
-
-        .check-box {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--primary);
-            cursor: pointer;
         }
 
         button, .btn-link {
@@ -280,26 +235,9 @@
         }
 
         .btn-generate {
-            background: linear-gradient(135deg, #ff5500 0%, #00f0ff 100%);
+            background: linear-gradient(135deg, #ff5500 0%, #ff2200 100%);
             color: white;
             display: none;
-        }
-
-        .console-box {
-            display: none;
-            background: #000;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            font-family: monospace;
-            text-align: left;
-        }
-
-        .console-line {
-            font-size: 0.8rem;
-            color: #00ff66;
-            margin-bottom: 4px;
         }
 
         .share-status-container {
@@ -430,103 +368,60 @@
         }
 
         @media (max-width: 480px) {
-            .two-columns, .sensi-grid { grid-template-columns: 1fr; }
+            .sensi-grid { grid-template-columns: 1fr; }
             .dpi-note { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Step 1: Login Overlay -->
+    <!-- Step 1: Login Screen -->
     <div id="loginOverlay">
         <div class="login-box">
             <h2>Fearless <span>Sensi Panel</span></h2>
-            <p>Unlock Sensitivity Panel</p>
+            <p>Join channel to unlock your daily key</p>
             
-            <!-- Safe anchor link to guarantee block-free browser navigation -->
             <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="btn-link btn-join" onclick="enableKeyInput()">STEP 1: JOIN CHANNEL 📢</a>
             
             <div class="form-group">
-                <label>Step 2: Enter Access Key:</label>
-                <input type="password" id="loginKey" placeholder="Join channel to get key..." disabled>
+                <label>Step 2: Enter Key:</label>
+                <input type="password" id="loginKey" placeholder="Join channel to see key..." disabled>
                 <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="get-key-hint">🔗 Get Key Here</a>
             </div>
             
-            <button class="btn-auth" id="authSubmitBtn" onclick="validateAccess()" disabled>Login</button>
+            <button class="btn-auth" id="authSubmitBtn" onclick="validateAccess()" disabled>Login Menu</button>
         </div>
     </div>
 
     <!-- Main Content Panel -->
     <div id="mainContent">
         <header>
-            <h1>Fearless <span>Sensi Panel</span></h1>
-            <p>Auto-Headshot Panel Menu</p>
+            <h1>Fearless <span>Sensi</span></h1>
+            <p>Auto-Headshot Menu Tool</p>
         </header>
 
         <div class="live-counter">
             <div class="pulse-dot"></div>
-            <span><strong id="userCount">18,450</strong> users online right now</span>
+            <span><strong id="userCount">16,300</strong> players active now</span>
         </div>
 
         <div class="container">
-            
-            <div class="panel-title">📱 Select Your Device</div>
-            <div class="two-columns">
-                <div class="form-group">
-                    <label for="deviceName">Device Name:</label>
-                    <input type="text" id="deviceName" placeholder="e.g., iPhone 11, Infinix Hot 30">
-                </div>
-                <div class="form-group">
-                    <label for="fpsTarget">FPS Mode:</label>
-                    <select id="fpsTarget">
-                        <option value="60">60 FPS</option>
-                        <option value="90">90 FPS (Smooth)</option>
-                        <option value="120">120 FPS (Ultra)</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="deviceName">Your Phone Name:</label>
+                <input type="text" id="deviceName" placeholder="e.g., iPhone 14, Infinix Hot 40, Samsung A32">
             </div>
 
-            <div class="panel-title">⚙️ Regedit Hack Settings</div>
-            <div class="setting-row">
-                <div class="setting-info">
-                    <h5>Super Fast Touch</h5>
-                    <p>Reduces screen touch delay response</p>
-                </div>
-                <input type="checkbox" id="flagTouch" class="check-box" checked>
-            </div>
-            <div class="setting-row">
-                <div class="setting-info">
-                    <h5>100% Aim Lock</h5>
-                    <p>Locks bullets to head tracking</p>
-                </div>
-                <input type="checkbox" id="flagMatrix" class="check-box" checked>
-            </div>
-            <div class="setting-row">
-                <div class="setting-info">
-                    <h5>Fix FPS Drops</h5>
-                    <p>Stops lag during close range fights</p>
-                </div>
-                <input type="checkbox" id="flagFPS" class="check-box">
-            </div>
-
-            <div style="margin-top: 20px;">
-                <button id="shareButton" class="btn-share" onclick="shareToWhatsApp()">🚀 Share to WhatsApp Groups to Unlock</button>
-                <button id="generateButton" class="btn-generate" onclick="runEngineSimulation()">⚡ Generate Settings Now</button>
-            </div>
+            <button id="shareButton" class="btn-share" onclick="shareToWhatsApp()">🚀 Share to 5 WhatsApp Groups to Unlock</button>
+            <button id="generateButton" class="btn-generate" onclick="getSensitivity()">⚡ Get Best Settings Now</button>
             
             <div class="share-status-container">
-                <div id="shareStatus" class="share-status">Shares: 0 / 5 Groups Done</div>
+                <div id="shareStatus" class="share-status">Shares completed: 0 / 5 Groups</div>
                 <div class="progress-bar">
                     <div id="progressFill" class="progress-fill"></div>
                 </div>
             </div>
 
-            <!-- Console Box -->
-            <div class="console-box" id="terminalBox">
-                <div id="terminalLines"></div>
-            </div>
-
-            <!-- Result Box -->
+            <!-- Settings Result Box -->
             <div class="result-box" id="resultBox">
                 <h3 class="result-title">Best Settings For: <span id="deviceTitle">Device</span></h3>
                 
@@ -542,10 +437,10 @@
             </div>
 
             <div class="contact-box">
-                <h4>Official Links</h4>
+                <h4>Official Group Links</h4>
                 <div class="links-flex">
                     <a href="https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E" target="_blank" class="owner-link link-channel">📢 Join Official Channel</a>
-                    <a href="https://wa.me/2349137895828" target="_blank" class="owner-link link-whatsapp">💬 Message Owner Directly</a>
+                    <a href="https://wa.me/2349137895828" target="_blank" class="owner-link link-whatsapp">💬 Chat with Owner</a>
                 </div>
             </div>
         </div>
@@ -556,18 +451,17 @@
         const requiredShares = 5;
         let channelJoined = false;
         const channelLink = "https://whatsapp.com/channel/0029VbDIkfX3GJOotlw08M3E";
-        let shareActive = false;
 
         function enableKeyInput() {
             channelJoined = true;
             document.getElementById('loginKey').disabled = false;
-            document.getElementById('loginKey').placeholder = "Enter Key...";
+            document.getElementById('loginKey').placeholder = "Type key here...";
             document.getElementById('authSubmitBtn').disabled = false;
         }
 
         function validateAccess() {
             if (!channelJoined) {
-                alert("⚠️ Error: You must Join the Channel first!");
+                alert("⚠️ You must click 'JOIN CHANNEL' first!");
                 return;
             }
             const keyIn = document.getElementById('loginKey').value.trim().toLowerCase();
@@ -581,37 +475,31 @@
         }
 
         function setupLiveCounter() {
-            let baseCount = Math.floor(Math.random() * 2000) + 18000;
+            let baseCount = Math.floor(Math.random() * 2500) + 16300;
             document.getElementById('userCount').textContent = baseCount.toLocaleString();
             setInterval(() => {
-                baseCount += Math.floor(Math.random() * 4) + 1;
+                baseCount += Math.floor(Math.random() * 3) + 1;
                 document.getElementById('userCount').textContent = baseCount.toLocaleString();
-            }, 3000);
+            }, 3500);
         }
 
         function shareToWhatsApp() {
             const device = document.getElementById('deviceName').value.trim();
             if (!device) {
-                alert('Please enter your Device Name first!');
+                alert('Please enter your Phone Name first!');
                 return;
             }
 
             if (!isValidDeviceName(device)) {
-                alert("❌ Error: Please type a real phone brand name (e.g. iPhone, Infinix, Samsung, Tecno)!");
+                alert("❌ Wrong Device: Please type a real phone name (like iPhone, Infinix, Tecno, Samsung)!");
                 return;
             }
 
+            // Exactly as requested formatted message format
             const rawText = ````😈ALL IOS AND ANDROID VERSIONS DEVICE SENSITIVITY 💯🗿``\n\n*Sensitivity Site :* ${window.location.href}\n\n*Join Fearless Xit Official Channel For Daily  Regedit and Files 👇🫶*\n${channelLink}`;
             const encodedText = encodeURIComponent(rawText);
 
-            shareActive = true;
             window.open(`[https://wa.me/?text=$](https://wa.me/?text=$){encodedText}`, '_blank');
-        }
-
-        window.addEventListener('focus', () => {
-            if (!shareActive) return;
-            shareActive = false;
-
             shareCount++;
             
             const statusText = document.getElementById('shareStatus');
@@ -623,16 +511,14 @@
             fill.style.width = `${Math.min(percentage, 100)}%`;
 
             if (shareCount < requiredShares) {
-                statusText.textContent = `Shares: ${shareCount} / ${requiredShares} Groups Done`;
-                alert(`✅ Share counted! (${shareCount}/${requiredShares}). Complete remaining shares to unlock panel.`);
+                statusText.textContent = `Shares completed: ${shareCount} / ${requiredShares} Groups`;
             } else {
-                statusText.textContent = "✅ All Shares Verified! Ready.";
+                statusText.textContent = "✅ Verification Done! Settings unlocked.";
                 statusText.style.color = "#00ff66";
                 shareBtn.style.display = "none";
                 generateBtn.style.display = "block";
-                alert("🎉 Success! You unlocked the generator. Click the button below to inject settings.");
             }
-        });
+        }
 
         function isValidDeviceName(name) {
             const inputLower = name.toLowerCase();
@@ -645,48 +531,42 @@
             return brandKeywords.some(keyword => inputLower.includes(keyword));
         }
 
-        function runEngineSimulation() {
-            const device = document.getElementById('deviceName').value.trim();
-            if (!isValidDeviceName(device)) return;
-
-            document.getElementById('generateButton').disabled = true;
-            const termBox = document.getElementById('terminalBox');
-            const termLinesContainer = document.getElementById('terminalLines');
-            termBox.style.display = 'block';
-            termLinesContainer.innerHTML = '';
-
-            const logs = [
-                `[+] Connecting to Free Fire hack base...`,
-                `[+] Loading phone files for: ${device}`,
-                `[+] Applying Auto-Aim headshot adjustments...`,
-                `[+] Tweaking registry touch response values...`,
-                `[✓] Settings generated successfully!`
-            ];
-
-            let lineIndex = 0;
-            function printLine() {
-                if (lineIndex < logs.length) {
-                    const div = document.createElement('div');
-                    div.className = 'console-line';
-                    div.textContent = logs[lineIndex];
-                    termLinesContainer.appendChild(div);
-                    lineIndex++;
-                    setTimeout(printLine, 400);
-                } else {
-                    setTimeout(getSensitivity, 400);
-                }
-            }
-            printLine();
-        }
-
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
         function getSensitivity() {
             const device = document.getElementById('deviceName').value.trim();
-            const fpsValue = document.getElementById('fpsTarget').value;
 
-            const gen = getRandomInt(185, 200);
-            const red = getRandomInt(180, 198);
-            const sc2 =
+            if (!isValidDeviceName(device)) {
+                alert("❌ Enter a real phone name.");
+                document.getElementById('resultBox').style.display = 'none';
+                return;
+            }
+
+            const gen = getRandomInt(180, 200);
+            const red = getRandomInt(175, 195);
+            const sc2 = getRandomInt(170, 190);
+            const sc4 = getRandomInt(165, 185);
+            const snip = getRandomInt(90, 115);
+            const free = getRandomInt(140, 180);
+            
+            const dpis = [411, 440, 480, 500, 525];
+            const chosenDpi = dpis[Math.floor(Math.random() * dpis.length)];
+            const chosenFireBtn = getRandomInt(42, 49);
+
+            document.getElementById('deviceTitle').textContent = device;
+            document.getElementById('gen').textContent = gen;
+            document.getElementById('red').textContent = red;
+            document.getElementById('sc2').textContent = sc2;
+            document.getElementById('sc4').textContent = sc4;
+            document.getElementById('snip').textContent = snip;
+            document.getElementById('free').textContent = free;
+            document.getElementById('dpiNote').textContent = `🔥 Tip: Set your phone DPI to ${chosenDpi}. Set Fire Button size to ${chosenFireBtn}%. Drag up quickly for pure red numbers!`;
+
+            document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
